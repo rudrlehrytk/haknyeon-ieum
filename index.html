@@ -2,12 +2,12 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>학년이음 | 6학년 업무 인수인계 캘린더</title>
-<meta name="description" content="졸업앨범, 수학여행, 중입 배정, 졸업식. 학교 일정에 맞춰 수정하고 다음 담당자에게 넘기는 초등 6학년 업무 캘린더.">
+<title>학년이음 | 초등 1~6학년 업무 인수인계 캘린더</title>
+<meta id="metaDesc" name="description" content="입학식부터 졸업식까지. 학교 일정에 맞게 수정하고 다음 담당자에게 넘기는 초등 1~6학년 인수인계 캘린더.">
 <meta name="theme-color" content="#183b2e">
 <meta name="robots" content="noindex">
-<meta property="og:title" content="학년이음 | 6학년 업무 인수인계 캘린더">
-<meta property="og:description" content="졸업앨범, 수학여행, 중입 배정, 졸업식. 학교 일정에 맞춰 수정하고 다음 담당자에게 넘기는 초등 6학년 업무 캘린더.">
+<meta id="ogTitle" property="og:title" content="학년이음 | 초등 1~6학년 업무 인수인계 캘린더">
+<meta id="ogDesc" property="og:description" content="입학식부터 졸업식까지. 학교 일정에 맞게 수정하고 다음 담당자에게 넘기는 초등 1~6학년 인수인계 캘린더.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ko_KR">
 <style>
@@ -16,25 +16,119 @@
 @media(max-width:820px){.wrap{width:calc(100% - 28px)}.month-list{display:flex;overflow-x:auto;padding:2px 2px 5px;scrollbar-width:thin;scroll-padding-inline:2px}.month{min-width:55px;flex:1}.workspace{grid-template-columns:150px minmax(0,1fr)}.brand small{display:none}.hero{padding:21px 23px}.sheet{padding:15px}}
 @media(max-width:570px){.wrap{width:calc(100% - 22px)}.topbar{min-height:59px}.brand{font-size:18px}.mark{width:30px;height:30px}.mark svg{width:18px;height:18px}.actions{gap:4px}.topbar .btn,.topbar .select{font-size:11px;padding:4px 6px;min-height:34px}.hero{grid-template-columns:1fr;gap:12px;margin:14px 0 11px;border-radius:19px;padding:17px}.hero .sub{font-size:12px;margin-top:6px}.progress-card{padding:8px 11px}.p-line strong{font-size:21px}.notice{font-size:11px;margin-bottom:11px}.months{padding:12px 10px 8px;margin-bottom:10px;border-radius:15px}.workspace{grid-template-columns:1fr;gap:9px}.sidebar{padding:5px;overflow-x:auto;display:flex;align-items:center;border-radius:12px}.sidebar .side-heading,.sidebar .aside-note{display:none}.cat{width:auto;flex:none;padding:5px 7px;min-height:34px;font-size:11px}.sheet{border-radius:15px;padding:12px}.sheet-head{margin-bottom:10px}.task{gap:7px;padding:7px 6px}.task-title{font-size:13px}.task-meta{font-size:10px}.when,.when .no-date{font-size:10px}.sheet-head .btn{font-size:12px;padding:5px 8px;min-height:34px}.dialog-inner{padding:14px}.export-row{flex-wrap:wrap}.fields{gap:7px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+.grades{border-bottom:1px solid var(--line);background:#f9fcf8}.gtabs{display:flex;gap:6px;overflow-x:auto;padding:8px 0}.gtab{min-height:41px;padding:6px 18px;border:1px solid var(--line);border-radius:99px;background:#fff;color:var(--ink);font-weight:720;white-space:nowrap}.gtab:hover{background:#f0f6ef;border-color:#b6cdbc}.gtab[aria-selected="true"]{background:var(--green);border-color:var(--green);color:#fff}.foot a{overflow-wrap:anywhere}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap topbar"><div class="brand"><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 10h18m-13 5 2.2 2.2L16 13"/></svg></span>학년이음 <small>6학년 업무 인수인계</small></div><div class="actions"><select id="year" class="select compact" aria-label="학년도"></select><button type="button" class="btn subtle" id="settingsBtn">학교 설정</button><button type="button" class="btn" id="transferBtn">내보내기 · 백업</button></div></div></header>
-<main class="wrap">
-<section class="hero" aria-labelledby="mainTitle"><div><p class="kicker" id="eyebrow">초등학교 6학년 · 연간 업무</p><h1 id="mainTitle">6학년 업무 인수인계 캘린더</h1><p class="sub">지난해의 노하우를, 올해 학교 일정에 맞게.</p></div><div class="progress-card"><div class="p-label">학년도 전체 진행률</div><div class="p-line"><strong id="pct">0%</strong><span id="progressText"></span></div><div class="bar" id="progress" role="progressbar" aria-label="업무 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><b id="progressFill" style="width:0%"></b></div></div></section>
+<header class="top"><div class="wrap topbar"><div class="brand"><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 10h18m-13 5 2.2 2.2L16 13"/></svg></span>학년이음 <small id="brandSmall">6학년 업무 인수인계</small></div><div class="actions"><select id="year" class="select compact" aria-label="학년도"></select><button type="button" class="btn subtle" id="settingsBtn">학교 설정</button><button type="button" class="btn" id="transferBtn">내보내기 · 백업</button></div></div></header>
+<div class="grades"><div class="wrap gtabs" role="tablist" aria-label="학년 선택" id="gradeTabs"></div></div>
+<main class="wrap"><div id="gradePanel" role="tabpanel" aria-labelledby="gtab-6">
+<section class="hero" aria-labelledby="mainTitle"><div><p class="kicker" id="eyebrow">초등학교 6학년 · 연간 업무</p><h1 id="mainTitle">6학년 업무 인수인계 캘린더</h1><p class="sub" id="heroSub">지난해의 노하우를, 올해 학교 일정에 맞게.</p></div><div class="progress-card"><div class="p-label">학년도 전체 진행률</div><div class="p-line"><strong id="pct">0%</strong><span id="progressText"></span></div><div class="bar" id="progress" role="progressbar" aria-label="업무 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><b id="progressFill" style="width:0%"></b></div></div></section>
 <div class="notice"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-9v1"/></svg><span><strong>월별 일정은 예시입니다.</strong> 날짜를 정하기 전 올해 교육지원청 공문·학교 계획을 확인하세요. 학생 정보나 내부 문서 원본은 여기에 입력하지 마세요.</span></div>
 <section class="months" aria-labelledby="monthHeading"><div class="sectionline"><h2 id="monthHeading">학년도 타임라인</h2><div class="view-tools"><button type="button" class="btn subtle" id="thisMonth">이번 달</button><button type="button" class="btn" id="allMonths" aria-pressed="false">연간 보기</button></div></div><div id="months" class="month-list" aria-label="월 선택"></div></section>
-<div class="workspace"><aside class="sidebar" aria-label="업무 분류"><h2 class="side-heading">업무 분류</h2><div id="categories" style="display:contents"></div><p class="aside-note">제목을 열어 담당, 마감일, 근거 위치를 우리 학교 방식에 맞게 바꿀 수 있어요.</p></aside><section class="sheet" aria-labelledby="viewTitle"><div class="sheet-head"><div><h2 id="viewTitle">업무 목록</h2><p id="viewSub"></p></div><button class="btn primary" type="button" id="newTask">+ 업무 추가</button></div><div class="filters"><label class="sr" for="search">연간 업무 검색</label><input type="search" class="input" id="search" placeholder="업무·담당·메모 검색 (연간)"><label class="sr" for="statusFilter">진행 상태</label><select class="select" id="statusFilter"><option value="all">전체 상태</option><option value="open">미완료</option><option value="doing">진행 중</option><option value="done">완료</option><option value="skip">해당 없음</option></select></div><p id="saveWarning" class="legend warning" hidden>브라우저에 저장할 수 없습니다. 창을 닫기 전에 JSON 백업을 내려받으세요.</p><div id="taskList" class="list"></div></section></div>
-<footer class="foot"><p>참고: 인디동학년 <a href="https://indischool.com/boards/colleagues/37549587" target="_blank" rel="noopener noreferrer">6학년업무정리 2026학년도 ver.</a> (2026.02.04, 인디스쿨 로그인 필요)</p><p class="muted">학교 업무 사례를 재구성한 독립 도구입니다. 인디스쿨의 공식 서비스가 아니며, 올해 공문과 학교 계획을 우선하세요. 입력·수정 데이터는 서비스에 전송되지 않고 이 브라우저에 저장됩니다. 다른 기기 또는 예전에 내려받은 HTML에서 옮길 때는 JSON 백업을 사용하세요.</p></footer>
-</main>
+<div class="workspace"><aside class="sidebar" aria-label="업무 분류"><h2 class="side-heading">업무 분류</h2><div id="categories" style="display:contents"></div><p class="aside-note">제목을 열어 담당, 마감일, 근거 위치를 우리 학교 방식에 맞게 바꿀 수 있어요.</p></aside><section class="sheet" aria-labelledby="viewTitle"><div class="sheet-head"><div><h2 id="viewTitle">업무 목록</h2><p id="viewSub"></p></div><button class="btn primary" type="button" id="newTask">+ 업무 추가</button></div><div class="filters"><label class="sr" for="search">연간 업무 검색</label><input type="search" class="input" id="search" placeholder="업무·담당·메모 검색 (연간)"><label class="sr" for="statusFilter">진행 상태</label><select class="select" id="statusFilter"><option value="all">전체 상태</option><option value="open">미완료</option><option value="doing">진행 중</option><option value="done">완료</option><option value="skip">해당 없음</option></select></div><p id="contentNote" class="legend" hidden></p><p id="saveWarning" class="legend warning" hidden>브라우저에 저장할 수 없습니다. 창을 닫기 전에 JSON 백업을 내려받으세요.</p><div id="taskList" class="list"></div></section></div>
+<footer class="foot"><p id="sourceLine"></p><p class="muted" id="foot2">학교 업무 사례를 재구성한 독립 도구입니다. 인디스쿨의 공식 서비스가 아니며, 올해 공문과 학교 계획을 우선하세요. 입력·수정 데이터는 서비스에 전송되지 않고 이 브라우저에 저장됩니다. 다른 기기 또는 예전에 내려받은 HTML에서 옮길 때는 JSON 백업을 사용하세요.</p></footer>
+</div></main>
 <dialog id="editDialog" aria-labelledby="editTitle"><form id="editForm" class="dialog-inner"><div class="dialog-head"><h2 id="editTitle">업무 편집</h2><button type="button" class="btn" data-close="editDialog">닫기</button></div><div class="refbox" id="refBox"></div><div class="fields"><label class="field wide"><span>업무 이름 *</span><input class="input" id="fTitle" maxlength="100" required></label><label class="field"><span>분류</span><select class="select" id="fCategory"></select></label><label class="field"><span>상태</span><select class="select" id="fStatus"><option value="todo">미시작</option><option value="doing">진행 중</option><option value="done">완료</option><option value="skip">해당 없음</option></select></label><label class="field"><span>표시할 월</span><select class="select" id="fSlot"></select></label><label class="field"><span>학교 마감일 (선택)</span><input type="date" class="input" id="fDate"></label><label class="field"><span>담당 역할</span><input class="input" id="fRole" maxlength="80" placeholder="예: 6학년부장 + 행정실"></label><label class="field"><span>근거·공문 위치 (문서명/번호)</span><input class="input" id="fRef" maxlength="200" placeholder="예: 2026 교내 행사계획 3쪽"></label><label class="field"><span>근거 마지막 확인일</span><input type="date" class="input" id="fVerified"></label><label class="field wide"><span>우리 학교 인수인계 메모</span><textarea class="input" id="fNotes" maxlength="2000" placeholder="절차·협의할 역할·누락 주의점. 학생 이름, 연락처, 계좌번호, 비밀번호는 적지 마세요."></textarea></label></div><div class="dialog-actions"><button type="button" class="btn danger left" id="deleteTask">삭제</button><button type="submit" class="btn primary">저장</button></div></form></dialog>
 <dialog id="settingsDialog" aria-labelledby="settingsTitle"><form id="settingsForm" class="dialog-inner"><div class="dialog-head"><h2 id="settingsTitle">학교·학년도 설정</h2><button type="button" class="btn" data-close="settingsDialog">닫기</button></div><p>학교 별칭은 선택 사항입니다. 이전 학년도를 복제하면 담당·메모는 남고 상태는 미시작으로 돌아갑니다. 확정 마감일과 확인일은 새 학년도에 다시 입력합니다.</p><div class="fields"><label class="field wide"><span>학교 별칭 (현재 학년도)</span><input id="school" class="input" maxlength="50" placeholder="예: 우리 학교"></label><label class="field"><span>열거나 만들 학년도</span><input type="number" id="targetYear" class="input" min="2000" max="2090" step="1" required></label><label class="field"><span>새 학년도 구성</span><select id="yearMode" class="select"><option value="template">기본 템플릿으로 시작</option><option value="copy">현재 학년도에서 복제</option></select></label></div><div class="dialog-actions"><button type="submit" class="btn primary">적용</button></div></form></dialog>
-<dialog id="transferDialog" aria-labelledby="transferTitle"><div class="dialog-inner"><div class="dialog-head"><h2 id="transferTitle">내보내기 · 백업</h2><button type="button" class="btn" data-close="transferDialog">닫기</button></div><p>현재 학년도의 업무를 파일로 저장하세요. 다른 기기나 후임에게 건넬 때는 JSON 백업을 사용하세요. 백업에도 입력한 메모가 포함되니 전달 전 확인하세요.</p><div class="export-grid"><div class="export-row"><div><b>인수인계 표</b><span>전체 업무·담당·상태·메모를 엑셀에서 열 수 있는 CSV</span></div><button type="button" class="btn" id="csvBtn">CSV 받기</button></div><div class="export-row"><div><b>외부 캘린더용</b><span>확정 날짜가 있고 ‘해당 없음’이 아닌 업무만 포함. 메모는 제외.</span></div><button type="button" class="btn" id="icsBtn">ICS 받기</button></div><div class="export-row"><div><b>백업 파일</b><span>현재 학년도 데이터를 복원하거나 후임에게 넘길 수 있는 JSON</span></div><button type="button" class="btn" id="jsonBtn">JSON 받기</button></div><div class="export-row"><div><b>백업 복원</b><span>파일과 같은 학년도의 업무를 교체합니다. 다른 학년도는 유지됩니다.</span></div><input type="file" class="file" id="restoreFile" aria-label="백업 파일 선택" accept=".json,application/json"></div></div><div class="dialog-actions"><button type="button" class="btn primary" id="restoreBtn" disabled>선택한 파일 복원</button></div><p id="exportFeedback" aria-live="polite" style="margin-top:8px"></p></div></dialog>
+<dialog id="transferDialog" aria-labelledby="transferTitle"><div class="dialog-inner"><div class="dialog-head"><h2 id="transferTitle">내보내기 · 백업</h2><button type="button" class="btn" data-close="transferDialog">닫기</button></div><p><strong id="transferScope">현재 학년도</strong>의 업무를 파일로 저장하세요. 다른 기기나 후임에게 건넬 때는 JSON 백업을 사용하세요. 백업에도 입력한 메모가 포함되니 전달 전 확인하세요.</p><div class="export-grid"><div class="export-row"><div><b>인수인계 표</b><span>전체 업무·담당·상태·메모를 엑셀에서 열 수 있는 CSV</span></div><button type="button" class="btn" id="csvBtn">CSV 받기</button></div><div class="export-row"><div><b>외부 캘린더용</b><span>확정 날짜가 있고 ‘해당 없음’이 아닌 업무만 포함. 메모는 제외.</span></div><button type="button" class="btn" id="icsBtn">ICS 받기</button></div><div class="export-row"><div><b>백업 파일</b><span>현재 학년·학년도 데이터를 복원하거나 후임에게 넘길 수 있는 JSON. 학년 정보가 들어 있어, 예전 6학년 전용 앱에서는 열리지 않을 수 있어요.</span></div><button type="button" class="btn" id="jsonBtn">JSON 받기</button></div><div class="export-row"><div><b>백업 복원</b><span>파일에 적힌 학년·학년도의 업무만 교체합니다. 다른 학년·학년도는 유지됩니다. 학년 표시가 없는 예전 백업은 6학년으로 처리합니다.</span></div><input type="file" class="file" id="restoreFile" aria-label="백업 파일 선택" accept=".json,application/json"></div></div><div class="dialog-actions"><button type="button" class="btn primary" id="restoreBtn" disabled>선택한 파일 복원</button></div><p id="exportFeedback" aria-live="polite" style="margin-top:8px"></p></div></dialog>
 <div id="toast" class="status" role="status" aria-live="polite"></div>
 <script>
 'use strict';
+const gradeContent = {
+ 1:{sources:[{"title":"2026 1학년 부장업무 체크리스트 공유","url":"https://indischool.com/boards/colleagues/37549464"},{"title":"입학식과 학부모와의 만남 운영 사례","url":"https://indischool.com/boards/colleagues/37552054"},{"title":"1학년 3월 아침·수업 루틴 사례","url":"https://indischool.com/boards/colleagues/37549586"},{"title":"2학기 운영 계획 사례","url":"https://indischool.com/boards/colleagues/37593614"},{"title":"신입생 예비소집 접수 방식 논의","url":"https://indischool.com/boards/colleagues/37463737"}],rows:[
+  ["events",-1,"입학식 장소·형식·예산 협의","1학년부장 · 교무 · 행정실","입학식 전 · 예시 2월","전년도 계획을 확인하고 강당 또는 교실 진행 여부를 정한다. 행사 물품과 업체 계약은 학교 절차에 맞춘다.",0],
+  ["events",-1,"입학 선물·적응 교재·이름표 수량 확인","입학식 담당 · 행정실","입학식 전 · 예시 2월","기존 주문 내역과 납품일을 대조한다. 학급별로 나눌 물품, 보관 위치, 당일 배부 역할을 정한다.",0],
+  ["start",-1,"신입생 반·교실 확정 및 공식 안내 채널 확인","교무 · 1학년부장","학교 지정 반편성·안내일","반과 교실 배정을 확정하고, 학교가 정한 방식과 공개 범위로 보호자에게 안내한다. 학생 명단은 학교 시스템에서만 관리한다.",0],
+  ["lesson",-1,"입학초기 적응활동 시수·시간표 확인","1학년부장 · 교육과정 담당","학년 준비 기간","올해 학교 교육과정에서 적응활동 시수와 단축수업 일정을 확인한다. 전담·특별실 시간표와 충돌하지 않는지 본다.",0],
+  ["start",-1,"동학년 업무 분담과 서식 위치 인계","1학년부장 · 동학년","개학 전 동학년 협의","안내·평가·준비물·자료 제출의 담당과 확인자를 정한다. 파일 원본이 아닌 문서명과 학교 내 위치를 기록한다.",0],
+  ["start",-1,"신입생 안내자료·동의서 준비","1학년부장 · 담임","입학식 전","첫 주 일정, 준비물, 담임 안내를 준비한다. 기초조사와 동의서는 올해 학교 공식 서식을 사용하고 회수 방식도 함께 정한다.",0],
+  ["events",0,"입학식 동선·안내·장비 최종 확인","입학식 담당 · 동학년","입학식 직전","정문에서 행사장과 교실까지 안내 위치, 반별 이동 순서, 마이크·좌석·배부 물품을 점검한다.",0],
+  ["events",0,"입학 당일 보호자 안내 및 오리엔테이션","담임 · 교무","입학식 당일 또는 설명회","소통 창구와 첫 주 일정, 등하교 절차를 안내한다. 설명회 진행 여부와 그 시간의 학생 감독 역할을 학교와 확인한다.",1],
+  ["start",0,"등교·교실 정리·수업 시작 루틴 연습","담임","3월 적응 기간","아침에 할 일을 글과 그림으로 짧게 보여주고 교실에서 반복해 본다. 학생이 익숙해지는 속도에 맞춰 안내를 줄인다.",2],
+  ["start",0,"급식실 이동과 식사 전 생활 절차 지도","담임 · 동학년","3월 적응 기간","줄 서기, 손 씻기, 급식실로 이동하는 방법을 지도한다. 학교의 급식실 동선과 안내 방식을 우선한다.",2],
+  ["lesson",1,"적응활동을 마무리하고 읽기·수업 루틴 조정","담임 · 동학년","4월 전후 · 적응 정도에 따라","수업에 들어가기 전과 마무리 흐름을 점검한다. 학생 부담을 보며 그림책 읽기나 간단한 독서 기록을 단계적으로 조정한다.",2],
+  ["lesson",3,"1학기 학습·생활 관찰 기록 점검","담임 · 동학년","1학기 기록 마감 전 · 공통 점검","올해 학교 평가·기록 기준을 확인하고 수업 중 관찰 근거를 점검한다. 학생별 내용은 앱에 남기지 않는다."],
+  ["closing",4,"1학기 마감과 방학 생활 안내","담임 · 1학년부장","여름방학 전 · 공통 점검","학교 지정 기록 마감일과 공개 일정을 확인하고, 방학 중 연락·안전 안내를 학교 채널로 전달한다."],
+  ["start",5,"2학기 학습준비물·교실 루틴 재점검","1학년부장 · 담임","2학기 개학 전후","남은 준비물과 교실 루틴을 확인한다. 1학기에 잘 작동한 절차는 유지하고, 변경사항은 공식 채널로 안내한다.",3],
+  ["closing",9,"2학기 평가·기재·자료 보관 방식 확인","담임 · 평가 담당","학년말 기록 마감 전 · 공통 점검","학교가 공지한 기재 기준과 마감을 확인한다. 다음 학년으로 넘길 자료와 공식 보관 위치를 구분한다."],
+  ["events",10,"차년도 예비소집 업무 협조와 서식 위치 공유","교무 · 차년도 담당","예비소집 공지 기준 · 예시 겨울","예비소집의 일정, 장소, 접수 방식, 안내 역할을 교무와 확인한다. 학교별 접수 방식을 공식 안내에서 확인한다.",4],
+  ["closing",11,"다음 학년 담당자에게 운영 절차 인계","1학년부장 · 담임","학년 종료 전 · 공통 점검","효과가 있었던 적응 지원, 반복 문의, 여분 교재 위치를 정리한다. 학생 개인 기록은 공식 인계 절차만 이용한다."]
+ ]},
+ 2:{sources:[{"title":"2학년 3월 개학 첫날 수업 및 활동","url":"https://indischool.com/boards/colleagues/37469405"},{"title":"2학년 받아쓰기 지도 사례","url":"https://indischool.com/boards/colleagues/37563694"},{"title":"2학년 2학기 통합교과 놀이 준비물 점검","url":"https://indischool.com/boards/colleagues/37595534"},{"title":"저학년 2학기 초 상담지 사례","url":"https://indischool.com/boards/colleagues/37593786"},{"title":"저학년 통합교과 학기말 종합의견 질문","url":"https://indischool.com/boards/colleagues/37589760"},{"title":"2학년 학기말 나이스 입력 질문","url":"https://indischool.com/boards/colleagues/37507656"}],rows:[
+  ["start",-1,"전년도 운영 자료·학교 일정 받기","2학년부장 · 동학년","개학 전 · 공통 점검","전임자에게 업무 대장, 공문 위치, 반복 행사와 공통 서식을 받는다. 담당 간 업무를 나눠 확인한다."],
+  ["start",-1,"개학 첫날 시간표와 활동 준비","담임 · 동학년","개학 전","학교가 확정한 수업 종료 시각을 확인한다. 실제 시수에 맞춰 학급 소개와 일과 안내, 교과 준비 시간을 배치한다.",0],
+  ["start",0,"학급 규칙·준비물·소통 창구 안내","담임","3월 첫 주 · 공통 점검","등하교, 기본 준비물, 연락 및 상담 신청 방법을 올해 학교 공식 채널로 안내한다."],
+  ["lesson",0,"1학기 통합교과 활동 준비물 점검","2학년부장 · 동학년","1학기 초 · 통합교과 차시 기준","사용 교과서와 활동별 필요한 공용 물품을 대조한다. 빌릴 물품, 구매할 물품, 준비 담당을 나눈다.",2],
+  ["lesson",1,"기초 읽기·쓰기 점검과 받아쓰기 운영 협의","담임 · 동학년","1학기 초 · 필요에 따라","어려워하는 글자와 표현을 확인하고 설명·연습·피드백 방식을 정한다. 급수표나 시험을 전 학급 의무로 두지 않는다.",1],
+  ["events",2,"2학년 공동 행사·체험 일정 확인","2학년부장 · 행사 담당","학교 계획 발표 후 · 예시 봄","실시할 행사의 인솔, 장소, 안내, 안전교육 및 변경 대안을 확인한다. 실시하지 않으면 해당 없음으로 기록한다."],
+  ["lesson",3,"통합교과 관찰·평가 기록 교차 점검","평가 담당 · 담임","1학기 기록 마감 전","통합교과 영역과 학기말 기재 단위를 올해 학교 기준으로 확인한다. 게시글 질문을 필수 규칙으로 적용하지 않는다.",4],
+  ["closing",4,"1학기 나이스 입력·공개 범위 확인","담임 · 평가 담당","여름방학 전 학교 마감일","교과와 창체에서 입력할 항목, 기록 기한, 검토 순서를 학교 안내에서 확인한다. 과거 메뉴나 수량 사례를 그대로 적용하지 않는다.",5],
+  ["lesson",5,"2학기 통합교과 놀이 준비물 구비","2학년부장 · 동학년","2학기 개학 전후","올해 교과서 놀이 차시를 기준으로 재고와 구매 필요 품목을 확인한다. 재사용품과 미리 신청할 물품을 구분한다.",2],
+  ["start",5,"개학 뒤 저학년 적응 상태 살피기","담임","2학기 초 · 필요에 따라","긴 글쓰기가 어려운 학생도 표현할 수 있게 쉬운 방식으로 의견을 듣는다. 상담 내용은 이 앱에 입력하지 않는다.",3],
+  ["lesson",6,"2학기 읽기·쓰기 지원 방식 조정","담임 · 동학년","2학기 수업 초반","1학기 관찰을 바탕으로 맞춤법을 설명하고, 틀렸을 때 다시 확인할 수 있는 연습 순서를 정한다.",1],
+  ["closing",8,"2학기 평가 누락과 근거 재점검","평가 담당 · 담임","2학기 입력 마감 전","통합교과·창체 관찰 근거와 기록 대상을 학교 기준에 맞춰 확인한다. 평가를 다시 해야 하는 경우 학교 절차를 따른다.",4],
+  ["closing",9,"2학기 평가 기록·안내 최종 점검","담임 · 평가 담당","학년말 학교 마감일","나이스 입력·검토·공개 일정을 확인한다. 서식과 학생별 원본의 보관 방식은 학교 기준을 따른다.",5],
+  ["closing",10,"다음 학년 운영 참고사항 정리","2학년부장 · 동학년","학년 종료 전 · 공통 점검","쌓인 학년 운영 노하우와 준비물 위치를 정리한다. 학생 개인 상담·평가 자료는 공식 절차로만 인계한다."],
+  ["closing",11,"동학년 인계 문서와 반복 일정 전달","2학년부장 · 후임","후임 협의일 · 공통 점검","일정의 확정 여부, 반복 절차, 담당과 공문 위치를 확인한다. 캘린더는 개인정보를 뺀 JSON으로 넘긴다."]
+ ]},
+ 3:{sources:[{"title":"3학년 부장 개학 전 준비 질문","url":"https://indischool.com/boards/colleagues/37298052"},{"title":"3학년 새학년 첫날 학급 운영 안내 모음","url":"https://indischool.com/boards/colleagues/37468820"},{"title":"3월 전입·전출 학생과 학업성취도 평가 질문","url":"https://indischool.com/boards/colleagues/37553853"},{"title":"3학년 영어 평가계획 질문","url":"https://indischool.com/boards/colleagues/37472575"},{"title":"생존수영 사전 안전지도 자료","url":"https://indischool.com/boards/colleagues/37583950"},{"title":"3학년 1학기 학기말 종합의견 사례","url":"https://indischool.com/boards/colleagues/37506081"},{"title":"3학년 2학기 여러 교과 개념정리 사례","url":"https://indischool.com/boards/colleagues/37545410"}],rows:[
+  ["start",-1,"개학 전 3학년부장 업무분장과 일정 확인","3학년부장 · 교무","개학 전 동학년 협의","전년도 업무 기록과 올해 학교 일정을 받아 평가, 행사, 자료 제출 역할을 나눈다. 확정되지 않은 일정은 미정으로 둔다.",0],
+  ["lesson",-1,"교과서·전담 수업·특별실 일정 대조","3학년부장 · 전담","학년 시작 전 · 학교 시간표 기준","사회·과학·영어를 포함한 사용 교과서, 전담 및 특별실 배정, 공동 준비물을 확인한다. 학교의 실제 운영 방식에 맞춘다.",6],
+  ["start",0,"학년 규칙·학급 시간표·보호자 안내 준비","담임 · 동학년","3월 개학 및 설명회 전","새 교실과 일과, 필요한 준비물, 학년 공통 규칙과 보호자 안내 시간을 학교에 맞춰 준비한다.",1],
+  ["lesson",0,"학업성취도 평가 대상·전출입 반영 확인","평가 담당 · 교무","평가 대상이면 시행 전에","학교가 운영하는 평가 여부와 올해 공문을 확인한다. 전출입이 진행 중인 경우 공식 절차로 대상 및 시스템 반영 상태를 확인한다.",2],
+  ["lesson",0,"영어 평가 계획의 교과서·성취기준 대조","영어 전담 · 평가 담당","학교 평가 계획 마감일","학교가 사용하는 교과서와 올해 평가 지침을 대조한다. 과거 사례의 기준 비율을 그대로 적용하지 않는다.",3],
+  ["lesson",1,"사회·과학·영어 수업의 학습지원 점검","담임 · 교과 전담","1학기 수업 초반","교과별로 익숙하지 않은 용어나 과제 유형을 확인하고 동학년과 보충 자료를 정한다.",6],
+  ["events",2,"생존수영 실시 여부·인솔·시설 협의","수영 담당 · 3학년부장","학교 계획에 따름 · 실시 학교만","우리 학교에서 3학년이 대상인지 확인한다. 실시하면 시설, 이동, 인솔과 안내 담당을 정한다. 해당하지 않으면 해당 없음으로 둔다.",4],
+  ["events",3,"생존수영 사전 안전지도와 불참 대안 확인","수영 담당 · 담임","실기 전 · 예시 6월","실제 수업 전 안전 수칙과 이동 절차를 지도한다. 참여가 어려운 경우 학교가 정한 대체 교육과 보호 체계를 확인한다.",4],
+  ["closing",4,"교과별 관찰 근거·1학기 종합의견 교차 점검","담임 · 평가 담당","1학기 평가 기록 마감 전","학습 관찰과 평가 근거를 확인하고 공식 기준에 맞춰 실제 학생의 기록을 검토한다. 예시 문장을 기계적으로 복제하지 않는다.",5],
+  ["lesson",5,"2학기 교과 수업 일정을 재조정","3학년부장 · 전담","2학기 개학 전후","사용 교과서와 전담 시간을 다시 확인하고 수학·과학·사회·영어의 공동 활동 및 준비물을 조율한다.",6],
+  ["lesson",6,"2학기 영어 평가 계획과 안내 확인","영어 전담 · 평가 담당","2학기 평가 계획 확정 후","학교의 2학기 평가 운영 계획, 학급별 역할과 보호자 안내 시점을 확인한다.",3],
+  ["lesson",8,"교과별 주요 개념과 평가 누락 점검","담임 · 동학년","2학기 마감 전 · 표시 월 예시","실제 사용 교과서에 맞춰 반복해서 어려워한 개념을 확인하고 보충 활동과 미완료 기록을 살핀다.",6],
+  ["closing",9,"학년말 교과·창체 기록 마감 확인","담임 · 평가 담당","학년말 학교 마감일 · 공통 점검","기록 마감, 점검 및 공개 일정과 보관 방식을 학교 기준으로 확인한다."],
+  ["closing",10,"교과별로 효과가 있었던 운영 방법 정리","3학년부장 · 동학년","학년 종료 전 · 공통 점검","교과 재구성, 특별실 준비물, 전담 협의 방식 중 다음 해에 남길 내용을 정리한다."],
+  ["closing",11,"다음 3학년 담당에게 운영과 자료 위치 인계","3학년부장 · 후임","학년 종료 전 · 공통 점검","원본 대신 학교 문서명과 위치, 담당 역할 및 확인 시점을 남긴다. 학생 관련 기록은 공식 인계 절차만 이용한다."]
+ ]},
+ 4:{sources:[{"title":"4학년 교과 연계 1학기 수업 계획 사례","url":"https://indischool.com/boards/colleagues/37477439"},{"title":"4학년 개정 교육과정 사회 평가 영역 질문","url":"https://indischool.com/boards/colleagues/37515406"},{"title":"4학년 사회에서 이미 배운 내용과 보충 범위 질문","url":"https://indischool.com/boards/colleagues/37512365"},{"title":"생존수영 안전교육 자료 사례","url":"https://indischool.com/boards/colleagues/37581826"},{"title":"찾아오는 체험학습으로 바꾼 사례","url":"https://indischool.com/boards/colleagues/37473829"},{"title":"지역을 알리는 사회 수업 프로젝트 사례","url":"https://indischool.com/boards/colleagues/37617885"},{"title":"4학년 1학기 학기말 종합의견 사례","url":"https://indischool.com/boards/colleagues/37506088"}],rows:[
+  ["start",-1,"학년 업무 역할·공동 시간표 확인","4학년부장 · 동학년","개학 전 · 공통 점검","교육과정, 평가, 체험학습의 담당과 확인 역할을 정한다. 전년도 참고 문서의 위치와 올해 확정 일정을 대조한다."],
+  ["lesson",-1,"교과 연계 차시와 선행 학습 순서 조율","4학년부장 · 동학년","1학기 계획 수립 전후","지역 인구나 자료를 비교할 때 필요한 큰 수·그래프 등을 함께 살핀 사례를 참고한다. 올해 사용 교과서의 차시와 실제 수업 순서를 협의한다.",0],
+  ["start",0,"학년 공통 생활 안내와 준비물 점검","담임 · 동학년","3월 첫 주 · 공통 점검","시간표, 준비물, 연락 창구를 학교 방식에 맞춰 안내한다. 일정이 다른 반에는 학년 공통과 반별 안내를 구분한다."],
+  ["lesson",0,"4학년 사회 지역화 자료와 활용 범위 확인","사회 담당 · 동학년","1학기 사회 계획 확정 시","지역 자료의 최신성, 우리 반에서 다룰 조사 범위와 출처를 확인한다. 교과에서 제시한 과제와 연결되는지 협의한다.",0],
+  ["events",1,"지역 연계 현장 또는 교내 체험 형태 협의","체험학습 담당 · 교무","실시 여부 협의 시 · 표시 월 예시","학교 계획에 따라 현장형이나 학교로 찾아오는 형태를 검토한다. 활동 주제, 장소, 비용, 인솔 또는 교내 운영 역할을 확인한다.",4],
+  ["events",2,"생존수영 대상 학년·이동·안전교육 확인","수영 담당 · 동학년","실기 전 · 실시 학교만","4학년이 올해 대상이면 이동·인솔, 기관과 협의할 내용, 사전 안전교육을 정리한다. 실시하지 않으면 해당 없음으로 둔다.",3],
+  ["events",3,"생존수영 사전자료를 실제 운영 방식에 맞게 점검","수영 담당 · 담임","사전교육 전 · 표시 월 예시","활동지나 안내 자료가 실제 시설의 안전수칙, 이동 및 참여 방식과 맞는지 확인한다.",3],
+  ["closing",4,"1학기 종합의견 근거와 기록 검토","담임 · 평가 담당","1학기 평가 기록 마감 전","학습 및 평가 근거를 대조한 뒤 실제 학생의 내용인지 확인한다. 예시 의견을 획일적으로 적용하지 않는다.",6],
+  ["lesson",5,"3학년에서 배운 사회 내용과 보충 범위 대조","사회 담당 · 동학년","2학기 시작 전후 · 필요한 경우","전년도 사용 교육과정과 올해 지침을 비교해 중복과 보완이 필요한 지점을 확인한다. 과거 개정 전환 사례를 모든 학년도에 적용하지 않는다.",2],
+  ["lesson",6,"2학기 사회 평가 영역과 성취기준 확인","평가 담당 · 동학년","2학기 학교 평가 계획 확정 시","영역 구분과 범위를 올해 학교·교육청 기준으로 확인한다. 게시판의 질문을 공식 답변처럼 적용하지 않는다.",1],
+  ["lesson",7,"지역 소개 프로젝트·산출물 공유 범위 정하기","사회 담당 · 담임","단원 진도에 맞춤 · 표시 월 예시","지역의 자연, 역사, 문화 등 비교 기준을 정하고, 산출물을 반 밖에서 공유할 경우 공개 범위와 권한을 확인한다.",5],
+  ["lesson",8,"지역화 수업 자료·교류 활동 마무리","담임 · 동학년","프로젝트 종료 후 · 표시 월 예시","지역 자료의 사실 여부, 사용한 출처와 수업 결과를 간단히 정리한다. 학생 산출물은 앱에 업로드하지 않는다.",5],
+  ["closing",9,"연말 평가·학교 기록의 누락 확인","담임 · 평가 담당","학년말 학교 마감일 · 공통 점검","교과·창체 평가와 기록 순서를 학교 안내로 확인하고, 인계할 수업 자료와 공식 보관 자료를 구분한다."],
+  ["closing",10,"지역화·체험학습 운영 기록 정리","4학년부장 · 체험 담당","학년 종료 전 · 공통 점검","다음 담당자가 찾을 수 있도록 선정 이유, 현장 또는 교내 대안, 준비 기간과 재사용할 자료의 위치를 남긴다."],
+  ["closing",11,"4학년 운영 일정과 자료 위치 인계","4학년부장 · 후임","학년 종료 전 · 공통 점검","확정 시점, 담당, 공문 위치를 후임에게 넘긴다. 교과서가 바뀌면 수업 자료와 평가 범위를 다시 확인하도록 표시한다."]
+ ]},
+ 5:{sources:[{"title":"5학년 3월 1~2주 교실 운영 사례","url":"https://indischool.com/boards/colleagues/37389614"},{"title":"동학년 공동 작성으로 수합을 줄인 사례","url":"https://indischool.com/boards/colleagues/37147100"},{"title":"5학년 평가 영역별 점검표 사례","url":"https://indischool.com/boards/colleagues/37556925"},{"title":"수련활동 회의록·결재 관련 질문","url":"https://indischool.com/boards/colleagues/37498272"},{"title":"실과 음식 만들기 진행 방식 질문","url":"https://indischool.com/boards/colleagues/37316297"},{"title":"5학년 실과 조리 수업 준비 사례","url":"https://indischool.com/boards/colleagues/37610257"},{"title":"교과 평가결과를 모아 정리한 사례","url":"https://indischool.com/boards/colleagues/37619646"},{"title":"5학년 학기말 종합의견과 행동특성 정리 사례","url":"https://indischool.com/boards/colleagues/37545575"}],rows:[
+  ["start",-1,"학년 업무 분담과 공동 자료 위치 정하기","5학년부장 · 동학년","개학 전 협의","학교가 승인한 공동 작성 공간과 자료 위치를 정한다. 수합과 마감 확인은 담당을 지정하고 개인정보를 공유 문서에 넣지 않는다.",1],
+  ["lesson",-1,"교과·전담·실과 수업 준비 일정 확인","5학년부장 · 전담 · 실과 담당","개학 전 · 학교 시간표 기준","올해 실과 교과서와 운영 시설, 실습 또는 대체 수업의 여건을 확인한다. 교과별 예정 활동을 시간표와 비교한다.",4],
+  ["start",0,"고학년 학급 규칙·역할·소통 방식 만들기","담임 · 동학년","3월 첫 주","첫 만남 활동으로 학습·적응 상태를 살피고, 책임·존중·협력의 약속과 학급 역할을 함께 정한다.",0],
+  ["lesson",0,"교과별 평가 영역과 기록 방식 맞추기","평가 담당 · 담임","1학기 평가 계획 마감일","교과별 성취기준과 평가 영역, 관찰 근거를 학교 기준에 맞춰 정리한다. 게시글 속 학교의 영역 선택을 그대로 적용하지 않는다.",2],
+  ["events",1,"수련활동 실시 여부·역할과 절차 확인","5학년부장 · 수련 담당 · 교무","실시 계획 수립 시 · 해당 학교만","올해 운영 여부와 형식을 확인한다. 실시할 때 필요한 심의, 내부결재, 인솔 및 보호자 안내는 학교·교육청 기준으로 확인한다.",3],
+  ["events",2,"수련활동 사전 협의와 안전 계획 점검","수련 담당 · 교무 · 행정실","행사 전 · 표시 월 예시","위원회 또는 담당자 협의가 필요한지 확인하고, 안전교육, 이동과 현장 역할, 변경 시 연락 체계를 정리한다.",3],
+  ["lesson",2,"실과 조리 실습 환경과 대체 활동 확인","실과 담당 · 동학년","실습 차시 전 · 표시 월 예시","학교 실습 공간, 도구와 위생·안전 절차를 점검한다. 알레르기 등 개별 정보는 학교 공식 방식으로만 확인하고 필요 시 대체 활동을 마련한다.",4],
+  ["lesson",3,"교과별 평가 결과와 관찰 근거 중간 점검","평가 담당 · 담임","1학기 기록 마감 전","교과별로 정리한 평가 결과를 확인하고 누락된 근거를 보완한다. 학생 명단과 결과 원본은 학교의 승인된 위치에 둔다.",6],
+  ["closing",4,"1학기 종합의견·행동특성 기록 검토","담임 · 평가 담당","학교 지정 마감 전","수업 관찰에서 확인한 근거와 학생별 서술을 대조한다. 올해 학교생활기록부 기재요령과 학교 검토 일정을 우선한다.",7],
+  ["start",5,"2학기 공통 자료·협업 방식 정리","5학년부장 · 동학년","2학기 개학 전후","1학기 수합에서 중복된 단계를 줄이고, 공동 파일 위치와 마감 확인 주체를 다시 공유한다.",1],
+  ["lesson",6,"2학기 교과·실과 평가 일정 재확인","평가 담당 · 실과 담당","2학기 평가 계획 확정 후","교과별 평가 시기와 담당을 비교하고 공동 활동, 실습, 행사로 영향을 받는 차시를 조정한다.",2],
+  ["lesson",7,"실과 재료·수량·구매 일정 점검","실과 담당 · 행정실","실습 전 · 표시 월 예시","모둠별 준비물과 보유 재고를 확인한다. 재료 선정과 지출은 공급업체 홍보가 아닌 올해 학교 기준에 맞춘다.",5],
+  ["lesson",8,"2학기 교과 평가 결과 누락·오입력 점검","담임 · 평가 담당","2학기 기록 마감 전","교과 결과와 관찰 메모를 공식 기록과 대조한다. 학생별 평가표 자체는 이 앱에 입력하지 않는다.",6],
+  ["closing",9,"5학년 연말 종합의견·기재 일정 확인","담임 · 평가 담당","학년말 학교 마감일","교과와 행동특성 기록의 근거, 학년 협의와 최종 확인 날짜를 정리한다. 학교 기재 지침을 우선한다.",7],
+  ["closing",10,"6학년 진급 전 학년 운영 참고사항 정리","5학년부장 · 동학년","학년 종료 전 · 공통 점검","실과 실습과 수련 운영에서 반복되는 위험·준비 지점을 정리한다. 학생 개인 인계는 학교 공식 절차를 따른다."],
+  ["closing",11,"차년도 5학년 담당에게 업무 파일 인계","5학년부장 · 후임","학년 종료 전 · 공통 점검","공동 서식 위치, 평가 협의 시점, 체험 업무에서 놓치기 쉬운 부분을 남긴다. 학교 최신 지침에서 변경 여부를 재확인한다."]
+ ]}
+};
 const $=id=>document.getElementById(id);
-const C={album:['졸업앨범','#347550','#e9f4eb','#2f5e40'],trip:['수학여행','#326a92','#e9f2f9','#295474'],entry:['중입 배정','#93611e','#fbf1dc','#724a13'],ceremony:['졸업식','#8b4b76','#f7eaf3','#75375f'],other:['공통·기타','#65746d','#eef2ef','#46584e']};
+const C6={album:['졸업앨범','#347550','#e9f4eb','#2f5e40'],trip:['수학여행','#326a92','#e9f2f9','#295474'],entry:['중입 배정','#93611e','#fbf1dc','#724a13'],ceremony:['졸업식','#8b4b76','#f7eaf3','#75375f'],other:['공통·기타','#65746d','#eef2ef','#46584e']};
+const CN={start:['학년초·학급운영','#347550','#e9f4eb','#2f5e40'],lesson:['수업·평가','#326a92','#e9f2f9','#295474'],events:['행사·체험','#93611e','#fbf1dc','#724a13'],closing:['학년말·인계','#8b4b76','#f7eaf3','#75375f'],other:['공통·기타','#65746d','#eef2ef','#46584e']};
+let C=C6;
 const S={'todo':'미시작','doing':'진행 중','done':'완료','skip':'해당 없음'};
 const seed=[
 ['other',-1,'동학년 업무 분담 및 교차 확인 정하기','6학년부장 · 동학년','학년 시작 전 (시점 예시)','앨범·수학여행·중입·졸업식 담당을 나누고, 결재나 제출 직전 함께 확인할 업무를 정한다.'],
@@ -72,10 +166,8 @@ const seed=[
 ['ceremony',10,'졸업식 후 대여품 반납과 정리','졸업식 담당','행사 후 (표시 월 예시)','가운 등 대여 물품의 수량을 확인하고 반납한다. 다음 해에 참고할 일정·협의 사항만 메모로 남긴다.'],
 ['ceremony',10,'졸업대장·진로정보 등 마감 업무 확인','교무 · 나이스 담당 · 담임','행사 후 (표시 월 예시)','졸업대장 출력·전달, 진로정보 사전승인 등 해당 연도에 필요한 사후 처리를 학교 기준으로 확인한다. 학교생활기록부 출력 여부도 올해 지침을 확인한다.']
 ];
-const slots=[-1,...Array.from({length:12},(_,i)=>i)], key='grade6-handoff-calendar-v1', schema='grade6-handoff-calendar', maxTasks=700;
+const slots=[-1,...Array.from({length:12},(_,i)=>i)], key='grade6-handoff-calendar-v1', schema='grade6-handoff-calendar', key2='haknyeon-ieum-grades-v2', schema2='haknyeon-ieum-handoff', maxTasks=700;
 const today=new Date(), currentY=today.getFullYear()-(today.getMonth()<2?1:0);
-let persist=true, invalidStore=false;
-let store={active:currentY,years:{}};
 const clean=(t,n)=>typeof t==='string'?t.trim().slice(0,n):'';
 const validYear=y=>Number.isInteger(y)&&y>=2000&&y<=2090;
 const pad=n=>String(n).padStart(2,'0');
@@ -87,25 +179,42 @@ const dateOK=s=>{if(typeof s!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(s))return f
 const dateSlot=(y,d)=>slots.find(s=>ymstr(y,s)===d.slice(0,7));
 const has=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
 const makeId=()=>globalThis.crypto?.randomUUID?.()??`id-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-function normalize(record,y){
+let persist=true, invalidStore=false, grade=6;
+const CATS=g=>g===6?C6:CN, GR=[1,2,3,4,5,6];
+const GC=typeof gradeContent==='undefined'||!gradeContent||typeof gradeContent!=='object'?{}:gradeContent;
+const stores={};for(const g of GR)stores[g]={active:currentY,years:{}};
+function normalize(record,y,g){
+ const categories=CATS(g);
  if(!record||typeof record!=='object'||!Array.isArray(record.tasks)||record.tasks.length>maxTasks)throw Error('올바른 업무 목록을 찾을 수 없습니다.');
  const ids=new Set();
  const tasks=record.tasks.map(x=>{
-  if(!x||typeof x!=='object'||!clean(x.title,100)||!slots.includes(x.slot)||!has(C,x.cat)||!has(S,x.status)||typeof x.id!=='string'||!/^[a-zA-Z0-9_-]{1,100}$/.test(x.id)||ids.has(x.id))throw Error('업무 목록에 읽을 수 없는 항목이 있습니다.');
+  if(!x||typeof x!=='object'||!clean(x.title,100)||!slots.includes(x.slot)||!has(categories,x.cat)||!has(S,x.status)||typeof x.id!=='string'||!/^[a-zA-Z0-9_-]{1,100}$/.test(x.id)||ids.has(x.id))throw Error('업무 목록에 읽을 수 없는 항목이 있습니다.');
   ids.add(x.id);const date=dateOK(x.date)&&dateSlot(y,x.date)!==undefined?x.date:'';
-  return {id:x.id,cat:x.cat,slot:date?dateSlot(y,date):x.slot,title:clean(x.title,100),role:clean(x.role,80),timing:clean(x.timing,100),status:x.status,date,ref:clean(x.ref,200),verified:dateOK(x.verified)?x.verified:'',notes:clean(x.notes,2000)};
+  return {id:x.id,cat:x.cat,slot:date?dateSlot(y,date):x.slot,title:clean(x.title,100),role:clean(x.role,80),timing:clean(x.timing,100),status:x.status,date,ref:clean(x.ref,200),verified:dateOK(x.verified)?x.verified:'',notes:clean(x.notes,2000),...(g!==6&&Number.isInteger(x.src)&&x.src>=0&&x.src<100?{src:x.src}:{})};
  });
  return {school:clean(record.school,50),tasks};
 }
+const readStore=(s,g)=>{const yrs={};for(const [y,r] of Object.entries(s.years??{})){if(validYear(+y))yrs[y]=normalize(r,+y,g);}if(!Object.keys(yrs).length)throw Error('empty');return {active:validYear(s.active)?s.active:currentY,years:yrs};};
+const keepCopy=(k,raw)=>{try{if(localStorage.getItem(k)===null)localStorage.setItem(k,raw);}catch{}};
+let prefGrade=6;
 try{
  const raw=localStorage.getItem(key);
- if(raw){try{const s=JSON.parse(raw), yrs={};for(const [y,r] of Object.entries(s.years??{})){if(validYear(+y))yrs[y]=normalize(r,+y);}if(Object.keys(yrs).length)store={active:validYear(s.active)?s.active:currentY,years:yrs};else invalidStore=true;}catch{invalidStore=true;}}
+ if(raw){try{stores[6]=readStore(JSON.parse(raw),6);}catch{invalidStore=true;keepCopy(key+'-unreadable-backup',raw);}}
+ const raw2=localStorage.getItem(key2);
+ if(raw2){try{const s=JSON.parse(raw2);if(GR.includes(s.activeGrade))prefGrade=s.activeGrade;for(const g of [1,2,3,4,5]){const e=s.grades?.[g];if(e){try{stores[g]=readStore(e,g);}catch{invalidStore=true;keepCopy(key2+'-unreadable-backup',raw2);}}}}catch{invalidStore=true;keepCopy(key2+'-unreadable-backup',raw2);}}
 }catch{persist=false;}
+const hashGrade=()=>{const m=/grade=([1-6])\b/.exec(location.hash);return m?Number(m[1]):0;};
+grade=hashGrade()||prefGrade;C=CATS(grade);
+let store=stores[grade];
 let year=store.active;
-function makeTemplate(){return {school:'',tasks:seed.map(([cat,slot,title,role,timing,notes],i)=>({id:`base-${i+1}`,cat,slot,title,role,timing,notes,status:'todo',date:'',ref:'',verified:''}))};}
+const gradeRows=g=>g===6?seed:(Array.isArray(GC[g]?.rows)?GC[g].rows:[]).filter(r=>Array.isArray(r)&&slots.includes(r[1])&&clean(r[2],100));
+const gradeSources=g=>Array.isArray(GC[g]?.sources)?GC[g].sources:[];
+const srcOk=s=>{try{return s&&clean(s.title,200)&&/^https?:$/.test(new URL(s.url).protocol);}catch{return false;}};
+const srcOf=(g,t)=>{const s=Number.isInteger(t?.src)?gradeSources(g)[t.src]:null;return srcOk(s)?s:null;};
+function makeTemplate(){return {school:'',tasks:gradeRows(grade).map(([cat,slot,title,role,timing,notes,src],i)=>({id:grade===6?`base-${i+1}`:`g${grade}-base-${i+1}`,cat:has(C,cat)?cat:'other',slot,title:clean(title,100),role:clean(role,80),timing:clean(timing,100),notes:clean(notes,2000),status:'todo',date:'',ref:'',verified:'',...(Number.isInteger(src)&&src>=0&&src<100?{src}:{})}))};}
 const rec=()=>store.years[year];
 const currentSlot=y=>dateSlot(y,`${today.getFullYear()}-${pad(today.getMonth()+1)}-${pad(today.getDate())}`)??0;
-let month=currentSlot(year), cat='all', term='', filter='all', editing=null, toastTimer=0;
+let month=grade===6?currentSlot(year):'all', cat='all', term='', filter='all', editing=null, toastTimer=0;
 const node=(tag,cl,txt)=>{const e=document.createElement(tag);if(cl)e.className=cl;if(txt!==undefined)e.textContent=txt;return e;};
 const option=(sel,value,label)=>{const e=node('option','',label);e.value=value;sel.append(e);};
 const press=(button,on)=>button.setAttribute('aria-pressed',String(on));
@@ -113,14 +222,30 @@ const small=(text)=>node('small','',text);
 const checkSvg='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>';
 function say(s){$('toast').textContent=s;clearTimeout(toastTimer);toastTimer=setTimeout(()=>{$('toast').textContent='';},4000);}
 function storageWarn(){$('saveWarning').hidden=persist&&!invalidStore;$('saveWarning').textContent=invalidStore?'이전 브라우저 데이터를 읽을 수 없어 기본 예시를 표시합니다. JSON 백업이 있으면 복원하세요.':'브라우저에 저장할 수 없습니다. 창을 닫기 전에 JSON 백업을 내려받으세요.';}
-function save(){store.active=year;try{localStorage.setItem(key,JSON.stringify(store));persist=true;invalidStore=false;}catch{persist=false;}storageWarn();}
+function writeNew(){const grades={};for(const g of [1,2,3,4,5])if(Object.keys(stores[g].years).length)grades[g]={active:stores[g].active,years:stores[g].years};localStorage.setItem(key2,JSON.stringify({version:2,activeGrade:grade,grades}));}
+function save(){store.active=year;try{if(grade===6){localStorage.setItem(key,JSON.stringify(store));if(localStorage.getItem(key2)!==null)writeNew();}else writeNew();persist=true;invalidStore=false;}catch{persist=false;}storageWarn();}
+function savePrefs(){try{if(grade!==6||localStorage.getItem(key2)!==null)writeNew();}catch{}}
+function fillCats(){$('fCategory').replaceChildren();for(const [k,v] of Object.entries(C))option($('fCategory'),k,v[0]);}
+function drawTabs(){const t=$('gradeTabs');t.replaceChildren();for(const g of GR){const b=node('button','gtab',g+'학년');b.type='button';b.id='gtab-'+g;b.dataset.grade=String(g);b.setAttribute('role','tab');b.setAttribute('aria-controls','gradePanel');b.setAttribute('aria-selected',String(g===grade));b.tabIndex=g===grade?0:-1;t.append(b);}$('gradePanel').setAttribute('aria-labelledby','gtab-'+grade);}
+function context(){
+ const g=grade;document.title=`학년이음 | ${g}학년 업무 인수인계 캘린더`;$('brandSmall').textContent=`${g}학년 업무 인수인계`;$('mainTitle').textContent=`${g}학년 업무 인수인계 캘린더`;
+ const d=g===6?'입학식부터 졸업식까지. 학교 일정에 맞게 수정하고 다음 담당자에게 넘기는 초등 1~6학년 인수인계 캘린더.':`초등 ${g}학년 연간 업무를 학교 일정에 맞춰 수정하고 다음 담당자에게 넘기는 업무 캘린더.`;
+ for(const id of ['metaDesc','ogDesc'])$(id).setAttribute('content',d);$('ogTitle').setAttribute('content',document.title);
+ const p=$('sourceLine');p.replaceChildren();
+ const link=(href,text)=>{const a=node('a','',text);a.href=href;a.target='_blank';a.rel='noopener noreferrer';return a;};
+ if(g===6){p.append('참고: 인디동학년 ',link('https://indischool.com/boards/colleagues/37549587','6학년업무정리 2026학년도 ver.'),' (2026.02.04, 인디스쿨 로그인 필요)');$('foot2').textContent='학교 업무 사례를 재구성한 독립 도구입니다. 인디스쿨의 공식 서비스가 아니며, 올해 공문과 학교 계획을 우선하세요. 입력·수정 데이터는 서비스에 전송되지 않고 이 브라우저에 저장됩니다. 다른 기기 또는 예전에 내려받은 HTML에서 옮길 때는 JSON 백업을 사용하세요.';}
+ else{const ss=gradeSources(g).map((s,i)=>[s,i]).filter(([s])=>srcOk(s));if(!ss.length)p.textContent=`참고 자료: ${g}학년 출처 자료는 준비 중입니다.`;else{p.append(`${g}학년 참고 자료: `);ss.forEach(([s,i],k)=>{if(k)p.append(' · ');p.append(link(s.url,`${i+1}. ${clean(s.title,200)}`));});}
+  $('foot2').textContent='공개 자료와 학교 업무 사례를 재구성한 독립 도구이며 공식 서비스가 아닙니다. 올해 공문과 학교 계획을 우선하세요. 입력·수정 데이터는 서비스에 전송되지 않고 이 브라우저에 저장됩니다. 다른 기기로 옮길 때는 JSON 백업을 사용하세요.';}
+ const n=$('contentNote');n.hidden=!(g!==6&&!gradeRows(g).length);n.textContent=`${g}학년의 기본 업무 자료는 아직 준비되지 않았습니다. 업무를 직접 추가해 사용할 수 있어요.`;
+}
+function setGrade(g){if(!GR.includes(g)||g===grade)return;store.active=year;grade=g;store=stores[g];C=CATS(g);year=store.active;addYear(year);month=grade===6?currentSlot(year):'all';cat='all';term='';filter='all';$('search').value='';$('statusFilter').value='all';fillCats();drawTabs();savePrefs();try{history.replaceState(null,'','#grade='+g);}catch{}render(true);}
 function addYear(y){if(!has(store.years,y))store.years[y]=makeTemplate();}
 function years(){const list=[...new Set([...Object.keys(store.years).map(Number),currentY,Math.min(2090,currentY+1),Math.max(2000,currentY-1),year])].sort((a,b)=>b-a);$('year').replaceChildren();for(const y of list)option($('year'),y,`${y}학년도`);$('year').value=String(year);}
 function setYear(y){if(!validYear(y))return;addYear(y);year=y;month=currentSlot(y);cat='all';term='';filter='all';$('search').value='';$('statusFilter').value='all';save();render(true);}
 function col(el,c){el.style.setProperty('--dot',c[1]);el.style.setProperty('--chip',c[2]);el.style.setProperty('--chipink',c[3]);}
 function showMonth(s,focus=false){month=s;term='';$('search').value='';render(focus);}
 function render(scroll=false){
- years();const {school,tasks}=rec();$('eyebrow').textContent=school?`${year}학년도 · ${school}`:`초등학교 6학년 · ${year}학년도`;
+ years();context();const {school,tasks}=rec();$('eyebrow').textContent=school?`${grade}학년 · ${year}학년도 · ${school}`:`초등학교 ${grade}학년 · ${year}학년도`;
  const done=tasks.filter(t=>t.status==='done').length, applicable=tasks.filter(t=>t.status!=='skip').length, pct=applicable?Math.round(done/applicable*100):0;
  $('pct').textContent=`${pct}%`;$('progressText').textContent=`${applicable}개 중 ${done}개 완료`;$('progress').setAttribute('aria-valuenow',pct);$('progressFill').style.width=`${pct}%`;
  const yrView=month==='all'||Boolean(term);press($('allMonths'),yrView);$('months').replaceChildren();
@@ -147,22 +272,22 @@ function openEdit(t){
  editing=t?.id??null;
  $('editTitle').textContent=t?'업무 상세 · 편집':'업무 추가';$('deleteTask').hidden=!t;
  $('fSlot').replaceChildren();for(const i of slots)option($('fSlot'),i,slotLabel(year,i));
- const box=$('refBox');box.hidden=!t?.timing;box.textContent=t?.timing?`원문 기준 시점: ${t.timing} / 표시 월과 학교 마감일은 직접 수정할 수 있어요.`:'';
+ const box=$('refBox'),sr=srcOf(grade,t);box.replaceChildren();box.hidden=!(t?.timing||sr);if(t?.timing)box.append(node('div','',`${grade===6?"원문 기준 시점":"참고 시기"}: ${t.timing} / 표시 월과 학교 마감일은 직접 수정할 수 있어요.`));if(sr){const d=node('div','',`기본 자료 출처 ${t.src+1}: `),a=node('a','',clean(sr.title,200));a.href=sr.url;a.target='_blank';a.rel='noopener noreferrer';d.append(a);box.append(d);}
  const date=$('fDate');date.min=`${year}-02-01`;date.max=`${year+1}-02-${new Date(year+1,2,0).getDate()}`;
  $('fTitle').value=t?.title??'';$('fCategory').value=t?.cat??(cat==='all'?'other':cat);$('fStatus').value=t?.status??'todo';$('fSlot').value=String(t?.slot??(typeof month==='number'?month:currentSlot(year)));date.value=t?.date??'';$('fRole').value=t?.role??'';$('fRef').value=t?.ref??'';$('fVerified').value=t?.verified??'';$('fNotes').value=t?.notes??'';
  $('editDialog').showModal();$('fTitle').focus();
 }
 function output(name,text,mime){const u=URL.createObjectURL(new Blob([text],{type:mime}));const a=node('a');a.href=u;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),3000);}
-const fname=ext=>`grade6-handoff-${year}.${ext}`;
+const fname=ext=>`grade${grade}-handoff-${year}.${ext}`;
 const escCSV=x=>{let s=String(x??'');if(/^\s*[=+\-@]|^[\t\r\n]/.test(s))s="'"+s;return '"'+s.replaceAll('"','""')+'"';};
 const cmp=(a,b)=>a.slot-b.slot||(a.date||'9999').localeCompare(b.date||'9999');
-function exportCsv(){const header=['학년도','학교 별칭','표시 월','분류','업무','담당 역할','상태','학교 마감일','원문 시점','근거 위치','근거 확인일','인수인계 메모'];const rows=[...rec().tasks].sort(cmp).map(t=>[year,rec().school,ymstr(year,t.slot),C[t.cat][0],t.title,t.role,S[t.status],t.date,t.timing,t.ref,t.verified,t.notes]);output(fname('csv'),'\ufeff'+[header,...rows].map(row=>row.map(escCSV).join(',')).join('\r\n'),'text/csv;charset=utf-8');feedback('CSV 다운로드를 요청했습니다.');}
+function exportCsv(){const header=['학년','학년도','학교 별칭','표시 월','분류','업무','담당 역할','상태','학교 마감일','원문 시점','근거 위치','근거 확인일','인수인계 메모','기본 자료 출처'];const rows=[...rec().tasks].sort(cmp).map(t=>[`${grade}학년`,year,rec().school,ymstr(year,t.slot),C[t.cat][0],t.title,t.role,S[t.status],t.date,t.timing,t.ref,t.verified,t.notes,(s=>s?`${s.title} ${s.url}`:'')(srcOf(grade,t))]);output(fname('csv'),'\ufeff'+[header,...rows].map(row=>row.map(escCSV).join(',')).join('\r\n'),'text/csv;charset=utf-8');feedback('CSV 다운로드를 요청했습니다.');}
 const escIcs=s=>s.replaceAll('\\','\\\\').replace(/\r\n|\n|\r/g,'\\n').replaceAll(',','\\,').replaceAll(';','\\;');
 function foldIcs(s){const bytes=new TextEncoder();let out='',len=0;for(const ch of s){const n=bytes.encode(ch).length;if(len+n>75){out+='\r\n ';len=1;}out+=ch;len+=n;}return out;}
-function exportIcs(){const rows=rec().tasks.filter(t=>t.date&&t.status!=='skip').sort(cmp);if(!rows.length){feedback('학교 마감일을 입력한 업무가 아직 없습니다. 날짜를 저장한 뒤 다시 내보내세요.');return;}const dt=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Grade6 Handoff//Calendar v1//KO','CALSCALE:GREGORIAN'];for(const t of rows){lines.push('BEGIN:VEVENT',`UID:${year}-${t.id}@grade6-handoff.local`,`DTSTAMP:${dt}`,`DTSTART;VALUE=DATE:${t.date.replaceAll('-','')}`,`SUMMARY:${escIcs(`[6학년/${C[t.cat][0]}] ${t.title}`)}`,'END:VEVENT');}lines.push('END:VCALENDAR');output(fname('ics'),lines.map(foldIcs).join('\r\n')+'\r\n','text/calendar;charset=utf-8');feedback(`날짜가 확정된 ${rows.length}개 업무의 ICS 다운로드를 요청했습니다.`);}
-function exportJson(){output(fname('json'),JSON.stringify({schema,version:1,year,record:rec()},null,2),'application/json');feedback('JSON 백업 다운로드를 요청했습니다.');}
+function exportIcs(){const rows=rec().tasks.filter(t=>t.date&&t.status!=='skip').sort(cmp);if(!rows.length){feedback('학교 마감일을 입력한 업무가 아직 없습니다. 날짜를 저장한 뒤 다시 내보내세요.');return;}const dt=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');const lines=['BEGIN:VCALENDAR','VERSION:2.0',`PRODID:-//Haknyeon Ieum//Grade ${grade} Calendar//KO`,'CALSCALE:GREGORIAN'];for(const t of rows){lines.push('BEGIN:VEVENT',`UID:${grade===6?'':`g${grade}-`}${year}-${t.id}@${grade===6?'grade6-handoff':'haknyeon-ieum'}.local`,`DTSTAMP:${dt}`,`DTSTART;VALUE=DATE:${t.date.replaceAll('-','')}`,`SUMMARY:${escIcs(`[${grade}학년/${C[t.cat][0]}] ${t.title}`)}`,'END:VEVENT');}lines.push('END:VCALENDAR');output(fname('ics'),lines.map(foldIcs).join('\r\n')+'\r\n','text/calendar;charset=utf-8');feedback(`날짜가 확정된 ${rows.length}개 업무의 ICS 다운로드를 요청했습니다.`);}
+function exportJson(){output(fname('json'),JSON.stringify({schema:schema2,version:2,grade,year,record:rec()},null,2),'application/json');feedback('JSON 백업 다운로드를 요청했습니다.');}
 const feedback=s=>{$('exportFeedback').textContent=s;};
-for(const [k,v] of Object.entries(C))option($('fCategory'),k,v[0]);
+fillCats();
 $('year').addEventListener('change',e=>setYear(Number(e.target.value)));
 $('thisMonth').addEventListener('click',()=>{if(year!==currentY)setYear(currentY);else showMonth(currentSlot(year),true);});
 $('allMonths').addEventListener('click',()=>showMonth('all'));
@@ -179,7 +304,7 @@ $('editForm').addEventListener('submit',e=>{
  e.preventDefault();const title=clean($('fTitle').value,100);if(!title){$('fTitle').setCustomValidity('업무 이름을 입력하세요.');$('fTitle').reportValidity();return;}
  const old=rec().tasks.find(t=>t.id===editing), date=$('fDate').value, v=$('fVerified').value, slot=date?dateSlot(year,date):Number($('fSlot').value);
  if(!slots.includes(slot)){say('선택한 학년도 안의 날짜를 입력하세요.');return;}
- const n={id:old?.id??makeId(),cat:$('fCategory').value,slot,title,status:$('fStatus').value,date,role:clean($('fRole').value,80),ref:clean($('fRef').value,200),verified:dateOK(v)?v:'',notes:clean($('fNotes').value,2000),timing:old?.timing??''};
+ const n={id:old?.id??makeId(),cat:$('fCategory').value,slot,title,status:$('fStatus').value,date,role:clean($('fRole').value,80),ref:clean($('fRef').value,200),verified:dateOK(v)?v:'',notes:clean($('fNotes').value,2000),timing:old?.timing??'',...(old&&Number.isInteger(old.src)?{src:old.src}:{})};
  if(old)rec().tasks.splice(rec().tasks.indexOf(old),1,n);else rec().tasks.push(n);
  if(typeof month==='number'&&month!==n.slot&&!term)month=n.slot;
  if(cat!=='all'&&cat!==n.cat)cat=n.cat;
@@ -189,13 +314,17 @@ $('editForm').addEventListener('submit',e=>{
 $('deleteTask').addEventListener('click',()=>{const t=rec().tasks.find(x=>x.id===editing);if(!t||!confirm('이 업무를 삭제할까요? 필요한 내용은 미리 백업하세요.'))return;rec().tasks=rec().tasks.filter(x=>x.id!==t.id);save();$('editDialog').close();render();say('업무를 삭제했습니다.');});
 $('settingsBtn').addEventListener('click',()=>{$('school').value=rec().school;$('targetYear').value=year;$('yearMode').value='template';$('settingsDialog').showModal();});
 $('settingsForm').addEventListener('submit',e=>{e.preventDefault();const y=Number($('targetYear').value);if(!validYear(y))return;rec().school=clean($('school').value,50);if(!has(store.years,y)&&$('yearMode').value==='copy'){store.years[y]={school:rec().school,tasks:rec().tasks.map(t=>({...t,date:'',verified:'',status:'todo'}))};}$('settingsDialog').close();if(y!==year)setYear(y);else{save();render();}say('학교·학년도 설정을 적용했습니다.');});
-$('transferBtn').addEventListener('click',()=>{$('restoreFile').value='';$('restoreBtn').disabled=true;feedback('');$('transferDialog').showModal();});
+$('transferBtn').addEventListener('click',()=>{$('transferScope').textContent=`${grade}학년 ${year}학년도`;$('restoreFile').value='';$('restoreBtn').disabled=true;feedback('');$('transferDialog').showModal();});
 $('csvBtn').addEventListener('click',exportCsv);$('icsBtn').addEventListener('click',exportIcs);$('jsonBtn').addEventListener('click',exportJson);
 $('restoreFile').addEventListener('change',e=>{$('restoreBtn').disabled=!e.target.files.length;feedback('');});
-$('restoreBtn').addEventListener('click',async()=>{const f=$('restoreFile').files[0];if(!f)return;try{if(f.size>5_000_000)throw Error('5MB 이하의 파일을 선택하세요.');const d=JSON.parse(await f.text());if(!d||d.schema!==schema||d.version!==1||!validYear(d.year))throw Error('학년이음에서 저장한 JSON 백업을 선택하세요.');const r=normalize(d.record,d.year);if(has(store.years,d.year)&&!confirm(`${d.year}학년도의 기존 업무를 이 파일의 ${r.tasks.length}개 업무로 교체할까요?`))return;store.years[d.year]=r;$('transferDialog').close();setYear(d.year);say(`${d.year}학년도 백업을 복원했습니다.`);}catch(e){feedback(e instanceof SyntaxError?'JSON 파일을 읽을 수 없습니다.':e.message||'복원에 실패했습니다.');}});
+$('restoreBtn').addEventListener('click',async()=>{const f=$('restoreFile').files[0];if(!f)return;try{if(f.size>5_000_000)throw Error('5MB 이하의 파일을 선택하세요.');const d=JSON.parse(await f.text());let g;if(d&&d.schema===schema2&&d.version===2&&GR.includes(d.grade)&&validYear(d.year))g=d.grade;else if(d&&d.schema===schema&&d.version===1&&validYear(d.year))g=6;else throw Error('학년이음에서 저장한 JSON 백업을 선택하세요.');const r=normalize(d.record,d.year,g),legacy=d.schema===schema,exists=has(stores[g].years,d.year);if(exists||g!==grade||legacy){const m=`${g}학년 ${d.year}학년도 ${exists?`의 기존 업무를 이 파일의 ${r.tasks.length}개 업무로 교체`:`에 이 파일의 ${r.tasks.length}개 업무를 추가`}할까요? 다른 학년·학년도는 바뀌지 않습니다.`+(legacy?'\n(학년 표시가 없는 예전 백업이라 6학년으로 처리합니다.)':'')+(g!==grade?`\n현재 ${grade}학년이 아니라 ${g}학년 자료로 복원되며 화면도 ${g}학년으로 이동합니다.`:'');if(!confirm(m))return;}if(g!==grade)setGrade(g);store.years[d.year]=r;$('transferDialog').close();setYear(d.year);say(`${g}학년 ${d.year}학년도 백업을 복원했습니다.`);}catch(e){feedback(e instanceof SyntaxError?'JSON 파일을 읽을 수 없습니다.':e.message||'복원에 실패했습니다.');}});
 document.querySelectorAll('button[data-close]').forEach(b=>b.addEventListener('click',()=>$(b.dataset.close).close()));
 $('editDialog').addEventListener('close',()=>{$('fTitle').setCustomValidity('');});
-addYear(year);render(true);
+addYear(year);fillCats();drawTabs();
+$('gradeTabs').addEventListener('click',e=>{const b=e.target.closest('button[data-grade]');if(b){setGrade(Number(b.dataset.grade));$('gtab-'+grade)?.focus({preventScroll:true});}});
+$('gradeTabs').addEventListener('keydown',e=>{const i=GR.indexOf(grade);let n=-1;if(e.key==='ArrowRight')n=(i+1)%GR.length;else if(e.key==='ArrowLeft')n=(i+GR.length-1)%GR.length;else if(e.key==='Home')n=0;else if(e.key==='End')n=GR.length-1;if(n<0)return;e.preventDefault();setGrade(GR[n]);$('gtab-'+grade)?.focus({preventScroll:true});});
+addEventListener('hashchange',()=>{const g=hashGrade();if(g)setGrade(g);});
+render(true);
 </script>
 </body>
 </html>
