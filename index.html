@@ -17,6 +17,7 @@
 @media(max-width:570px){.wrap{width:calc(100% - 22px)}.topbar{min-height:59px}.brand{font-size:18px}.mark{width:30px;height:30px}.mark svg{width:18px;height:18px}.actions{gap:4px}.topbar .btn,.topbar .select{font-size:11px;padding:4px 6px;min-height:34px}.hero{grid-template-columns:1fr;gap:12px;margin:14px 0 11px;border-radius:19px;padding:17px}.hero .sub{font-size:12px;margin-top:6px}.progress-card{padding:8px 11px}.p-line strong{font-size:21px}.notice{font-size:11px;margin-bottom:11px}.months{padding:12px 10px 8px;margin-bottom:10px;border-radius:15px}.workspace{grid-template-columns:1fr;gap:9px}.sidebar{padding:5px;overflow-x:auto;display:flex;align-items:center;border-radius:12px}.sidebar .side-heading,.sidebar .aside-note{display:none}.cat{width:auto;flex:none;padding:5px 7px;min-height:34px;font-size:11px}.sheet{border-radius:15px;padding:12px}.sheet-head{margin-bottom:10px}.task{gap:7px;padding:7px 6px}.task-title{font-size:13px}.task-meta{font-size:10px}.when,.when .no-date{font-size:10px}.sheet-head .btn{font-size:12px;padding:5px 8px;min-height:34px}.dialog-inner{padding:14px}.export-row{flex-wrap:wrap}.fields{gap:7px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 .grades{border-bottom:1px solid var(--line);background:#f9fcf8}.gtabs{display:flex;gap:6px;overflow-x:auto;padding:8px 0}.gtab{min-height:41px;padding:6px 18px;border:1px solid var(--line);border-radius:99px;background:#fff;color:var(--ink);font-weight:720;white-space:nowrap}.gtab:hover{background:#f0f6ef;border-color:#b6cdbc}.gtab[aria-selected="true"]{background:var(--green);border-color:var(--green);color:#fff}.foot a{overflow-wrap:anywhere}
+.attach-box{margin-top:16px;border:1px solid var(--line);border-radius:14px;padding:13px;background:#f7faf6}.attach-heading{display:flex;justify-content:space-between;align-items:center;gap:8px}.attach-heading h3{font-size:16px}.attach-count{color:var(--green);font-weight:750;font-size:12px}.attach-box .muted{font-size:12px;margin-top:5px}.attach-list{list-style:none;margin:8px 0;padding:0;display:grid;gap:5px}.attach-list:empty{margin:0}.attach-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:5px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:4px 5px 4px 8px;background:#fff}.attach-name{overflow-wrap:anywhere;word-break:normal;font-size:13px}.attach-btn{font-size:12px;min-height:34px;padding:3px 8px}.attach-empty{color:var(--muted);font-size:12px}.attach-choose label{display:block;font-size:13px;font-weight:750}.attach-choose .file{max-width:100%;font-size:13px;margin:3px 0 0}.attach-status{font-size:12px;color:var(--green);font-weight:730}.attach-status:not(:empty){margin-top:6px}.attach-error{color:#912e39}.attach-badge{border-radius:20px;background:#e8f1e9;color:#29513b;padding:1px 6px;font-weight:720}.attach-badge[hidden]{display:none}@media(max-width:570px){.attach-box{padding:10px}.attach-name{font-size:12px}}
 </style>
 </head>
 <body>
@@ -29,9 +30,9 @@
 <div class="workspace"><aside class="sidebar" aria-label="업무 분류"><h2 class="side-heading">업무 분류</h2><div id="categories" style="display:contents"></div><p class="aside-note">제목을 열어 담당, 마감일, 근거 위치를 우리 학교 방식에 맞게 바꿀 수 있어요.</p></aside><section class="sheet" aria-labelledby="viewTitle"><div class="sheet-head"><div><h2 id="viewTitle">업무 목록</h2><p id="viewSub"></p></div><button class="btn primary" type="button" id="newTask">+ 업무 추가</button></div><div class="filters"><label class="sr" for="search">연간 업무 검색</label><input type="search" class="input" id="search" placeholder="업무·담당·메모 검색 (연간)"><label class="sr" for="statusFilter">진행 상태</label><select class="select" id="statusFilter"><option value="all">전체 상태</option><option value="open">미완료</option><option value="doing">진행 중</option><option value="done">완료</option><option value="skip">해당 없음</option></select></div><p id="contentNote" class="legend" hidden></p><p id="saveWarning" class="legend warning" hidden>브라우저에 저장할 수 없습니다. 창을 닫기 전에 JSON 백업을 내려받으세요.</p><div id="taskList" class="list"></div></section></div>
 <footer class="foot"><p id="sourceLine"></p><p class="muted" id="foot2">학교 업무 사례를 재구성한 독립 도구입니다. 인디스쿨의 공식 서비스가 아니며, 올해 공문과 학교 계획을 우선하세요. 입력·수정 데이터는 서비스에 전송되지 않고 이 브라우저에 저장됩니다. 다른 기기 또는 예전에 내려받은 HTML에서 옮길 때는 JSON 백업을 사용하세요.</p></footer>
 </div></main>
-<dialog id="editDialog" aria-labelledby="editTitle"><form id="editForm" class="dialog-inner"><div class="dialog-head"><h2 id="editTitle">업무 편집</h2><button type="button" class="btn" data-close="editDialog">닫기</button></div><div class="refbox" id="refBox"></div><div class="fields"><label class="field wide"><span>업무 이름 *</span><input class="input" id="fTitle" maxlength="100" required></label><label class="field"><span>분류</span><select class="select" id="fCategory"></select></label><label class="field"><span>상태</span><select class="select" id="fStatus"><option value="todo">미시작</option><option value="doing">진행 중</option><option value="done">완료</option><option value="skip">해당 없음</option></select></label><label class="field"><span>표시할 월</span><select class="select" id="fSlot"></select></label><label class="field"><span>학교 마감일 (선택)</span><input type="date" class="input" id="fDate"></label><label class="field"><span>담당 역할</span><input class="input" id="fRole" maxlength="80" placeholder="예: 6학년부장 + 행정실"></label><label class="field"><span>근거·공문 위치 (문서명/번호)</span><input class="input" id="fRef" maxlength="200" placeholder="예: 2026 교내 행사계획 3쪽"></label><label class="field"><span>근거 마지막 확인일</span><input type="date" class="input" id="fVerified"></label><label class="field wide"><span>우리 학교 인수인계 메모</span><textarea class="input" id="fNotes" maxlength="2000" placeholder="절차·협의할 역할·누락 주의점. 학생 이름, 연락처, 계좌번호, 비밀번호는 적지 마세요."></textarea></label></div><div class="dialog-actions"><button type="button" class="btn danger left" id="deleteTask">삭제</button><button type="submit" class="btn primary">저장</button></div></form></dialog>
-<dialog id="settingsDialog" aria-labelledby="settingsTitle"><form id="settingsForm" class="dialog-inner"><div class="dialog-head"><h2 id="settingsTitle">학교·학년도 설정</h2><button type="button" class="btn" data-close="settingsDialog">닫기</button></div><p>학교 별칭은 선택 사항입니다. 이전 학년도를 복제하면 담당·메모는 남고 상태는 미시작으로 돌아갑니다. 확정 마감일과 확인일은 새 학년도에 다시 입력합니다.</p><div class="fields"><label class="field wide"><span>학교 별칭 (현재 학년도)</span><input id="school" class="input" maxlength="50" placeholder="예: 우리 학교"></label><label class="field"><span>열거나 만들 학년도</span><input type="number" id="targetYear" class="input" min="2000" max="2090" step="1" required></label><label class="field"><span>새 학년도 구성</span><select id="yearMode" class="select"><option value="template">기본 템플릿으로 시작</option><option value="copy">현재 학년도에서 복제</option></select></label></div><div class="dialog-actions"><button type="submit" class="btn primary">적용</button></div></form></dialog>
-<dialog id="transferDialog" aria-labelledby="transferTitle"><div class="dialog-inner"><div class="dialog-head"><h2 id="transferTitle">내보내기 · 백업</h2><button type="button" class="btn" data-close="transferDialog">닫기</button></div><p><strong id="transferScope">현재 학년도</strong>의 업무를 파일로 저장하세요. 다른 기기나 후임에게 건넬 때는 JSON 백업을 사용하세요. 백업에도 입력한 메모가 포함되니 전달 전 확인하세요.</p><div class="export-grid"><div class="export-row"><div><b>인수인계 표</b><span>전체 업무·담당·상태·메모를 엑셀에서 열 수 있는 CSV</span></div><button type="button" class="btn" id="csvBtn">CSV 받기</button></div><div class="export-row"><div><b>외부 캘린더용</b><span>확정 날짜가 있고 ‘해당 없음’이 아닌 업무만 포함. 메모는 제외.</span></div><button type="button" class="btn" id="icsBtn">ICS 받기</button></div><div class="export-row"><div><b>백업 파일</b><span>현재 학년·학년도 데이터를 복원하거나 후임에게 넘길 수 있는 JSON. 학년 정보가 들어 있어, 예전 6학년 전용 앱에서는 열리지 않을 수 있어요.</span></div><button type="button" class="btn" id="jsonBtn">JSON 받기</button></div><div class="export-row"><div><b>백업 복원</b><span>파일에 적힌 학년·학년도의 업무만 교체합니다. 다른 학년·학년도는 유지됩니다. 학년 표시가 없는 예전 백업은 6학년으로 처리합니다.</span></div><input type="file" class="file" id="restoreFile" aria-label="백업 파일 선택" accept=".json,application/json"></div></div><div class="dialog-actions"><button type="button" class="btn primary" id="restoreBtn" disabled>선택한 파일 복원</button></div><p id="exportFeedback" aria-live="polite" style="margin-top:8px"></p></div></dialog>
+<dialog id="editDialog" aria-labelledby="editTitle"><form id="editForm" class="dialog-inner"><div class="dialog-head"><h2 id="editTitle">업무 편집</h2><button type="button" class="btn" data-close="editDialog">닫기</button></div><div class="refbox" id="refBox"></div><div class="fields"><label class="field wide"><span>업무 이름 *</span><input class="input" id="fTitle" maxlength="100" required></label><label class="field"><span>분류</span><select class="select" id="fCategory"></select></label><label class="field"><span>상태</span><select class="select" id="fStatus"><option value="todo">미시작</option><option value="doing">진행 중</option><option value="done">완료</option><option value="skip">해당 없음</option></select></label><label class="field"><span>표시할 월</span><select class="select" id="fSlot"></select></label><label class="field"><span>학교 마감일 (선택)</span><input type="date" class="input" id="fDate"></label><label class="field"><span>담당 역할</span><input class="input" id="fRole" maxlength="80" placeholder="예: 6학년부장 + 행정실"></label><label class="field"><span>근거·공문 위치 (문서명/번호)</span><input class="input" id="fRef" maxlength="200" placeholder="예: 2026 교내 행사계획 3쪽"></label><label class="field"><span>근거 마지막 확인일</span><input type="date" class="input" id="fVerified"></label><label class="field wide"><span>우리 학교 인수인계 메모</span><textarea class="input" id="fNotes" maxlength="2000" placeholder="절차·협의할 역할·누락 주의점. 학생 이름, 연락처, 계좌번호, 비밀번호는 적지 마세요."></textarea></label></div><section class="attach-box" aria-labelledby="attachmentHeading"><div class="attach-heading"><h3 id="attachmentHeading">업무 파일 첨부</h3><span id="attachmentCount" class="attach-count"></span></div><p id="attachmentHelp" class="muted">첨부는 이 브라우저에만 저장되며 다른 기기와 공유되지 않아요. 학생 개인정보가 담긴 파일은 첨부하지 마세요.</p><ul id="attachmentList" class="attach-list" aria-label="첨부한 파일"></ul><div id="attachmentChoose" class="attach-choose" hidden><label for="attachmentInput">파일 선택</label><input id="attachmentInput" class="file" type="file" multiple disabled aria-describedby="attachmentHelp attachmentRules"><p id="attachmentRules" class="muted">업무당 최대 8개, 파일당 25MB · 선택하면 바로 저장됩니다.</p></div><p id="attachmentLimit" class="muted" hidden>8개를 모두 첨부했어요. 새 파일을 첨부하려면 기존 파일을 정리하세요.</p><p id="attachmentStatus" class="attach-status" role="status" aria-live="polite"></p></section><div class="dialog-actions"><button type="button" class="btn danger left" id="deleteTask">삭제</button><button type="submit" class="btn primary">저장</button></div></form></dialog>
+<dialog id="settingsDialog" aria-labelledby="settingsTitle"><form id="settingsForm" class="dialog-inner"><div class="dialog-head"><h2 id="settingsTitle">학교·학년도 설정</h2><button type="button" class="btn" data-close="settingsDialog">닫기</button></div><p>학교 별칭은 선택 사항입니다. 이전 학년도를 복제하면 담당·메모는 남고 상태는 미시작으로 돌아갑니다. 확정 마감일과 확인일은 새 학년도에 다시 입력합니다. 첨부 파일은 복제되지 않습니다.</p><div class="fields"><label class="field wide"><span>학교 별칭 (현재 학년도)</span><input id="school" class="input" maxlength="50" placeholder="예: 우리 학교"></label><label class="field"><span>열거나 만들 학년도</span><input type="number" id="targetYear" class="input" min="2000" max="2090" step="1" required></label><label class="field"><span>새 학년도 구성</span><select id="yearMode" class="select"><option value="template">기본 템플릿으로 시작</option><option value="copy">현재 학년도에서 복제</option></select></label></div><div class="dialog-actions"><button type="submit" class="btn primary">적용</button></div></form></dialog>
+<dialog id="transferDialog" aria-labelledby="transferTitle"><div class="dialog-inner"><div class="dialog-head"><h2 id="transferTitle">내보내기 · 백업</h2><button type="button" class="btn" data-close="transferDialog">닫기</button></div><p><strong id="transferScope">현재 학년도</strong>의 업무를 파일로 저장하세요. 다른 기기나 후임에게 건넬 때는 JSON 백업을 사용하세요. 백업에 메모는 포함되지만 첨부 파일은 포함되지 않습니다. 파일을 옮기거나 브라우저 데이터를 지우기 전에는 업무 상세에서 첨부를 따로 내려받으세요.</p><div class="export-grid"><div class="export-row"><div><b>인수인계 표</b><span>전체 업무·담당·상태·메모를 엑셀에서 열 수 있는 CSV</span></div><button type="button" class="btn" id="csvBtn">CSV 받기</button></div><div class="export-row"><div><b>외부 캘린더용</b><span>확정 날짜가 있고 ‘해당 없음’이 아닌 업무만 포함. 메모는 제외.</span></div><button type="button" class="btn" id="icsBtn">ICS 받기</button></div><div class="export-row"><div><b>백업 파일</b><span>현재 학년·학년도 데이터를 복원하거나 후임에게 넘길 수 있는 JSON. 학년 정보가 들어 있어, 예전 6학년 전용 앱에서는 열리지 않을 수 있어요.</span></div><button type="button" class="btn" id="jsonBtn">JSON 받기</button></div><div class="export-row"><div><b>백업 복원</b><span>파일에 적힌 학년·학년도의 업무만 교체합니다. 다른 학년·학년도는 유지됩니다. 학년 표시가 없는 예전 백업은 6학년으로 처리합니다.</span></div><input type="file" class="file" id="restoreFile" aria-label="백업 파일 선택" accept=".json,application/json"></div></div><div class="dialog-actions"><button type="button" class="btn primary" id="restoreBtn" disabled>선택한 파일 복원</button></div><p id="exportFeedback" aria-live="polite" style="margin-top:8px"></p></div></dialog>
 <div id="toast" class="status" role="status" aria-live="polite"></div>
 <script>
 'use strict';
@@ -238,10 +239,10 @@ function context(){
   $('foot2').textContent='공개 자료와 학교 업무 사례를 재구성한 독립 도구이며 공식 서비스가 아닙니다. 올해 공문과 학교 계획을 우선하세요. 입력·수정 데이터는 서비스에 전송되지 않고 이 브라우저에 저장됩니다. 다른 기기로 옮길 때는 JSON 백업을 사용하세요.';}
  const n=$('contentNote');n.hidden=!(g!==6&&!gradeRows(g).length);n.textContent=`${g}학년의 기본 업무 자료는 아직 준비되지 않았습니다. 업무를 직접 추가해 사용할 수 있어요.`;
 }
-function setGrade(g){if(!GR.includes(g)||g===grade)return;store.active=year;grade=g;store=stores[g];C=CATS(g);year=store.active;addYear(year);month=grade===6?currentSlot(year):'all';cat='all';term='';filter='all';$('search').value='';$('statusFilter').value='all';fillCats();drawTabs();savePrefs();try{history.replaceState(null,'','#grade='+g);}catch{}render(true);}
+function setGrade(g){if(!GR.includes(g)||g===grade)return;if($('editDialog').open)$('editDialog').close();store.active=year;grade=g;store=stores[g];C=CATS(g);year=store.active;addYear(year);month=grade===6?currentSlot(year):'all';cat='all';term='';filter='all';$('search').value='';$('statusFilter').value='all';fillCats();drawTabs();savePrefs();try{history.replaceState(null,'','#grade='+g);}catch{}render(true);}
 function addYear(y){if(!has(store.years,y))store.years[y]=makeTemplate();}
 function years(){const list=[...new Set([...Object.keys(store.years).map(Number),currentY,Math.min(2090,currentY+1),Math.max(2000,currentY-1),year])].sort((a,b)=>b-a);$('year').replaceChildren();for(const y of list)option($('year'),y,`${y}학년도`);$('year').value=String(year);}
-function setYear(y){if(!validYear(y))return;addYear(y);year=y;month=currentSlot(y);cat='all';term='';filter='all';$('search').value='';$('statusFilter').value='all';save();render(true);}
+function setYear(y){if(!validYear(y))return;if($('editDialog').open)$('editDialog').close();addYear(y);year=y;month=currentSlot(y);cat='all';term='';filter='all';$('search').value='';$('statusFilter').value='all';save();render(true);}
 function col(el,c){el.style.setProperty('--dot',c[1]);el.style.setProperty('--chip',c[2]);el.style.setProperty('--chipink',c[3]);}
 function showMonth(s,focus=false){month=s;term='';$('search').value='';render(focus);}
 function render(scroll=false){
@@ -263,10 +264,10 @@ function render(scroll=false){
   const v=C[t.cat],row=node('article',`task${t.status==='done'?' done':t.status==='skip'?' is-skip':''}`);col(row,v);
   const tick=node('button','tick');tick.type='button';tick.dataset.id=t.id;tick.dataset.action='tick';tick.setAttribute('aria-label',`${t.title} ${t.status==='done'?'완료 취소':'완료로 표시'}`);press(tick,t.status==='done');tick.innerHTML=checkSvg;if(t.status==='skip'){tick.disabled=true;tick.title='해당 없음 상태는 업무 상세에서 바꿀 수 있어요.';}
   const center=node('div');const title=node('button','task-title',t.title);title.type='button';title.dataset.id=t.id;title.dataset.action='edit';center.append(title);
-  const info=node('div','task-meta');info.append(node('span','pill',v[0]),node('span','',S[t.status]));if(t.role)info.append(node('span','','· '+t.role));if(t.ref&&t.verified)info.append(node('span','','· 근거 확인 '+t.verified));center.append(info);
+  const info=node('div','task-meta');info.append(node('span','pill',v[0]),node('span','',S[t.status]));if(t.role)info.append(node('span','','· '+t.role));if(t.ref&&t.verified)info.append(node('span','','· 근거 확인 '+t.verified));const fileBadge=node('span','attach-badge');fileBadge.dataset.filesFor=t.id;fileBadge.hidden=true;info.append(fileBadge);center.append(info);
   const when=node('div','when');if(t.date){const d=node('time','',t.date);d.dateTime=t.date;const st=node('strong');st.append(d);when.append(st);}else{when.append(node('span','no-date','마감 미정'));}row.append(tick,center,when);list.append(row);
  }
- storageWarn();if(scroll){const active=$('months').querySelector('[aria-pressed="true"]');if(active&&$('months').scrollWidth>$('months').clientWidth){$('months').scrollLeft+=active.getBoundingClientRect().left-$('months').getBoundingClientRect().left- Math.max(0,($('months').clientWidth-active.offsetWidth)/2);}}
+ storageWarn();updateFileBadges();if(scroll){const active=$('months').querySelector('[aria-pressed="true"]');if(active&&$('months').scrollWidth>$('months').clientWidth){$('months').scrollLeft+=active.getBoundingClientRect().left-$('months').getBoundingClientRect().left- Math.max(0,($('months').clientWidth-active.offsetWidth)/2);}}
 }
 function openEdit(t){
  editing=t?.id??null;
@@ -275,7 +276,7 @@ function openEdit(t){
  const box=$('refBox'),sr=srcOf(grade,t);box.replaceChildren();box.hidden=!(t?.timing||sr);if(t?.timing)box.append(node('div','',`${grade===6?"원문 기준 시점":"참고 시기"}: ${t.timing} / 표시 월과 학교 마감일은 직접 수정할 수 있어요.`));if(sr){const d=node('div','',`기본 자료 출처 ${t.src+1}: `),a=node('a','',clean(sr.title,200));a.href=sr.url;a.target='_blank';a.rel='noopener noreferrer';d.append(a);box.append(d);}
  const date=$('fDate');date.min=`${year}-02-01`;date.max=`${year+1}-02-${new Date(year+1,2,0).getDate()}`;
  $('fTitle').value=t?.title??'';$('fCategory').value=t?.cat??(cat==='all'?'other':cat);$('fStatus').value=t?.status??'todo';$('fSlot').value=String(t?.slot??(typeof month==='number'?month:currentSlot(year)));date.value=t?.date??'';$('fRole').value=t?.role??'';$('fRef').value=t?.ref??'';$('fVerified').value=t?.verified??'';$('fNotes').value=t?.notes??'';
- $('editDialog').showModal();$('fTitle').focus();
+ showFilePanel(t);$('editDialog').showModal();$('fTitle').focus();
 }
 function output(name,text,mime){const u=URL.createObjectURL(new Blob([text],{type:mime}));const a=node('a');a.href=u;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),3000);}
 const fname=ext=>`grade${grade}-handoff-${year}.${ext}`;
@@ -286,6 +287,100 @@ const escIcs=s=>s.replaceAll('\\','\\\\').replace(/\r\n|\n|\r/g,'\\n').replaceAl
 function foldIcs(s){const bytes=new TextEncoder();let out='',len=0;for(const ch of s){const n=bytes.encode(ch).length;if(len+n>75){out+='\r\n ';len=1;}out+=ch;len+=n;}return out;}
 function exportIcs(){const rows=rec().tasks.filter(t=>t.date&&t.status!=='skip').sort(cmp);if(!rows.length){feedback('학교 마감일을 입력한 업무가 아직 없습니다. 날짜를 저장한 뒤 다시 내보내세요.');return;}const dt=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');const lines=['BEGIN:VCALENDAR','VERSION:2.0',`PRODID:-//Haknyeon Ieum//Grade ${grade} Calendar//KO`,'CALSCALE:GREGORIAN'];for(const t of rows){lines.push('BEGIN:VEVENT',`UID:${grade===6?'':`g${grade}-`}${year}-${t.id}@${grade===6?'grade6-handoff':'haknyeon-ieum'}.local`,`DTSTAMP:${dt}`,`DTSTART;VALUE=DATE:${t.date.replaceAll('-','')}`,`SUMMARY:${escIcs(`[${grade}학년/${C[t.cat][0]}] ${t.title}`)}`,'END:VEVENT');}lines.push('END:VCALENDAR');output(fname('ics'),lines.map(foldIcs).join('\r\n')+'\r\n','text/calendar;charset=utf-8');feedback(`날짜가 확정된 ${rows.length}개 업무의 ICS 다운로드를 요청했습니다.`);}
 function exportJson(){output(fname('json'),JSON.stringify({schema:schema2,version:2,grade,year,record:rec()},null,2),'application/json');feedback('JSON 백업 다운로드를 요청했습니다.');}
+const FILE_DB='haknyeon-ieum-attachments-v1', FILE_STORE='files', FILE_MAX=8, FILE_SIZE=25*1024*1024;
+let fileDbPromise, filePanel=null, fileCounts=null, fileCountTicket=0;
+const fileYear=(g,y)=>`${g}/${y}`;
+const fileScope=(g,y,id)=>`${fileYear(g,y)}/${id}`;
+function openFileDb(){
+ if(fileDbPromise)return fileDbPromise;
+ fileDbPromise=new Promise((resolve,reject)=>{
+  const request=indexedDB.open(FILE_DB,1);
+  request.onupgradeneeded=()=>{const files=request.result.createObjectStore(FILE_STORE,{keyPath:'id'});files.createIndex('byTask','scope');files.createIndex('byYearTask',['yearKey','task']);};
+  request.onsuccess=()=>{const db=request.result;db.onversionchange=()=>{db.close();fileDbPromise=null;};resolve(db);};
+  request.onerror=()=>reject(request.error);request.onblocked=()=>reject(new Error('다른 탭에서 파일 저장소를 사용 중입니다. 다른 학년이음 탭을 닫고 다시 시도하세요.'));
+ }).catch(e=>{fileDbPromise=null;throw e;});
+ return fileDbPromise;
+}
+async function fileTx(mode,work){
+ const db=await openFileDb();
+ return new Promise((resolve,reject)=>{
+  const tx=db.transaction(FILE_STORE,mode), s=tx.objectStore(FILE_STORE);let result, failure;
+  const assign=r=>{result=r;};const fail=e=>{failure=e;tx.abort();};
+  tx.oncomplete=()=>resolve(result);tx.onabort=()=>reject(failure??tx.error??new Error('파일 처리 작업이 취소됐습니다.'));
+  try{work(s,assign,fail);}catch(e){fail(e);}
+ });
+}
+function listTaskFiles(scope){return fileTx('readonly',(s,assign)=>{const r=s.index('byTask').getAll(scope);r.onsuccess=()=>assign(r.result);});}
+// Read attachment metadata to count badges without reading the file contents into memory.
+function countYearFiles(yearKey){return fileTx('readonly',(s,assign)=>{const counts=new Map(),r=s.index('byYearTask').openKeyCursor(IDBKeyRange.bound([yearKey],[yearKey,[]]));r.onsuccess=()=>{const c=r.result;if(!c){assign(counts);return;}const key=c.key[1];counts.set(key,(counts.get(key)??0)+1);c.continue();};});}
+function paintFileBadges(){
+ const counts=fileCounts?.key===fileYear(grade,year)?fileCounts.counts:null;
+ for(const b of $('taskList').querySelectorAll('[data-files-for]')){const n=counts?.get(b.dataset.filesFor)??0;b.hidden=n===0;b.textContent=n?`첨부 ${n}`:'';}
+}
+function updateFileBadges(force=false){
+ const k=fileYear(grade,year);paintFileBadges();if(!force&&fileCounts?.key===k)return;
+ fileCounts={key:k,counts:fileCounts?.key===k?fileCounts.counts:null};const ticket=++fileCountTicket;
+ countYearFiles(k).then(counts=>{if(ticket!==fileCountTicket||fileYear(grade,year)!==k)return;fileCounts={key:k,counts};paintFileBadges();}).catch(()=>{if(ticket===fileCountTicket)fileCounts=null;});
+}
+const fileLabel=f=>`${f.name} (${f.size<1024?`${f.size} B`:f.size<1024**2?`${(f.size/1024).toFixed(1)} KB`:`${(f.size/1024**2).toFixed(1)} MB`})`;
+const safeFileName=name=>String(name).replace(/[\\/\x00-\x1f\x7f\u202a-\u202e\u2066-\u2069]/g,'_').trim()||'파일';
+function friendlyFileError(e){return e?.name==='QuotaExceededError'?'브라우저 저장 공간이 부족합니다. 다른 첨부를 내려받아 정리한 뒤 다시 시도하세요.':e?.name==='SecurityError'||e?.name==='InvalidStateError'?'이 브라우저에서는 파일 저장소를 열 수 없습니다. 일반 브라우저 창에서 다시 열어 보세요.':e?.message||'파일을 처리하지 못했습니다. 다시 시도하세요.';}
+function setFileNotice(panel,text='',error=false){if(filePanel!==panel)return;const n=$('attachmentStatus');n.textContent=text;n.classList.toggle('attach-error',error);}
+function updateFileControls(panel){
+ if(filePanel!==panel)return;const off=panel.busy||!panel.task||panel.count===null||panel.count>=FILE_MAX;$('attachmentInput').disabled=off;
+ for(const b of $('attachmentList').querySelectorAll('button'))b.disabled=panel.busy;
+ $('attachmentCount').textContent=panel.task&&panel.count!==null?`${panel.count} / ${FILE_MAX}`:'';
+ $('attachmentChoose').hidden=!panel.task;
+}
+function downloadAttached(f){
+ const url=URL.createObjectURL(new Blob([f.blob],{type:'application/octet-stream'}));const a=node('a');a.href=url;a.download=f.name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30_000);
+}
+async function refreshFilePanel(panel){
+ if(!panel.task||filePanel!==panel)return;
+ try{
+  const files=await listTaskFiles(panel.scope);if(filePanel!==panel)return;
+  panel.count=files.length;const list=$('attachmentList');list.replaceChildren();
+  if(!files.length)list.append(node('li','attach-empty','아직 첨부한 파일이 없어요.'));
+  for(const f of files.sort((a,b)=>a.added-b.added||a.name.localeCompare(b.name,'ko'))){
+   const row=node('li','attach-row'),label=node('span','attach-name',fileLabel(f));label.title=f.name;
+   const get=node('button','btn attach-btn','받기');get.type='button';get.setAttribute('aria-label',`${f.name} 다운로드`);get.addEventListener('click',()=>{try{downloadAttached(f);setFileNotice(panel,'파일 다운로드를 요청했습니다.');}catch(e){setFileNotice(panel,friendlyFileError(e),true);}});
+   const remove=node('button','btn danger attach-btn','삭제');remove.type='button';remove.setAttribute('aria-label',`${f.name} 첨부 삭제`);remove.addEventListener('click',()=>runFileAction(panel,async()=>{
+    if(!confirm(`‘${f.name}’ 첨부를 삭제할까요? 이 브라우저에 저장된 파일이 삭제됩니다.`))return null;
+    await fileTx('readwrite',s=>s.delete(f.id));return '첨부 파일을 삭제했습니다.';
+   }));row.append(label,get,remove);list.append(row);
+  }
+  $('attachmentLimit').hidden=files.length<FILE_MAX;
+ }catch(e){panel.count=null;if(filePanel===panel){$('attachmentList').replaceChildren();setFileNotice(panel,friendlyFileError(e),true);}}finally{updateFileControls(panel);}
+}
+function showFilePanel(t){
+ const panel={task:t?.id??null,scope:t?fileScope(grade,year,t.id):'',yearKey:fileYear(grade,year),busy:false,count:null};filePanel=panel;
+ $('attachmentInput').value='';$('attachmentList').replaceChildren();$('attachmentLimit').hidden=true;
+ setFileNotice(panel,t?'':'새 업무를 먼저 저장한 다음 상세에서 파일을 첨부할 수 있어요.');updateFileControls(panel);if(t)void refreshFilePanel(panel);
+}
+async function runFileAction(panel,work){
+ if(!panel||panel.busy||filePanel!==panel)return;
+ panel.busy=true;updateFileControls(panel);setFileNotice(panel,'');
+ try{const done=await work();if(!done)return;setFileNotice(panel,done);await refreshFilePanel(panel);updateFileBadges(true);}
+ catch(e){setFileNotice(panel,friendlyFileError(e),true);}
+ finally{panel.busy=false;updateFileControls(panel);}
+}
+function dropTaskFiles(g,y,id){
+ return fileTx('readwrite',s=>{const r=s.index('byTask').openCursor(fileScope(g,y,id));r.onsuccess=()=>{const cur=r.result;if(cur){cur.delete();cur.continue();}};});
+}
+$('attachmentInput').addEventListener('change',e=>{
+ const files=[...e.target.files];e.target.value='';const panel=filePanel;if(!files.length||!panel?.task)return;
+ void runFileAction(panel,async()=>{
+  if(files.some(f=>f.size>FILE_SIZE))throw Error('파일 하나는 25MB까지 첨부할 수 있어요. 파일을 줄인 뒤 다시 선택하세요.');
+  await fileTx('readwrite',(s,assign,fail)=>{
+   const r=s.index('byTask').count(panel.scope);r.onsuccess=()=>{
+    if(r.result+files.length>FILE_MAX){fail(Error(`업무 한 건에 ${FILE_MAX}개까지 첨부할 수 있어요. 파일 수를 줄여 다시 선택하세요.`));return;}
+    try{for(const f of files)s.add({id:makeId(),scope:panel.scope,yearKey:panel.yearKey,task:panel.task,name:safeFileName(f.name),size:f.size,added:Date.now(),blob:f.slice()});}catch(err){fail(err);}
+   };
+  });return `${files.length}개 파일을 이 브라우저에 저장했습니다.`;
+ });
+});
+window.addEventListener('focus',()=>{updateFileBadges(true);if(filePanel&&!filePanel.busy)void refreshFilePanel(filePanel);});
+
 const feedback=s=>{$('exportFeedback').textContent=s;};
 fillCats();
 $('year').addEventListener('change',e=>setYear(Number(e.target.value)));
@@ -311,15 +406,19 @@ $('editForm').addEventListener('submit',e=>{
  if(!old){filter='all';$('statusFilter').value='all';term='';$('search').value='';}
  save();$('editDialog').close();render(true);say(old?'업무를 수정했습니다.':'업무를 추가했습니다.');
 });
-$('deleteTask').addEventListener('click',()=>{const t=rec().tasks.find(x=>x.id===editing);if(!t||!confirm('이 업무를 삭제할까요? 필요한 내용은 미리 백업하세요.'))return;rec().tasks=rec().tasks.filter(x=>x.id!==t.id);save();$('editDialog').close();render();say('업무를 삭제했습니다.');});
+$('deleteTask').addEventListener('click',async()=>{
+ const record=rec(),t=record.tasks.find(x=>x.id===editing),g=grade,y=year;if(!t||!confirm('이 업무를 삭제할까요? 이 브라우저에 저장된 첨부 파일도 함께 삭제됩니다. 필요한 파일은 먼저 내려받으세요.'))return;
+ const tasks=record.tasks;record.tasks=tasks.filter(x=>x.id!==t.id);save();if(!persist){record.tasks=tasks;say('브라우저에 저장할 수 없어 업무를 삭제하지 않았습니다.');return;}
+ $('editDialog').close();render();say('업무를 삭제했습니다.');try{await dropTaskFiles(g,y,t.id);updateFileBadges(true);}catch{say('업무는 삭제했지만 브라우저의 첨부 파일을 정리하지 못했습니다.');}
+});
 $('settingsBtn').addEventListener('click',()=>{$('school').value=rec().school;$('targetYear').value=year;$('yearMode').value='template';$('settingsDialog').showModal();});
 $('settingsForm').addEventListener('submit',e=>{e.preventDefault();const y=Number($('targetYear').value);if(!validYear(y))return;rec().school=clean($('school').value,50);if(!has(store.years,y)&&$('yearMode').value==='copy'){store.years[y]={school:rec().school,tasks:rec().tasks.map(t=>({...t,date:'',verified:'',status:'todo'}))};}$('settingsDialog').close();if(y!==year)setYear(y);else{save();render();}say('학교·학년도 설정을 적용했습니다.');});
 $('transferBtn').addEventListener('click',()=>{$('transferScope').textContent=`${grade}학년 ${year}학년도`;$('restoreFile').value='';$('restoreBtn').disabled=true;feedback('');$('transferDialog').showModal();});
 $('csvBtn').addEventListener('click',exportCsv);$('icsBtn').addEventListener('click',exportIcs);$('jsonBtn').addEventListener('click',exportJson);
 $('restoreFile').addEventListener('change',e=>{$('restoreBtn').disabled=!e.target.files.length;feedback('');});
-$('restoreBtn').addEventListener('click',async()=>{const f=$('restoreFile').files[0];if(!f)return;try{if(f.size>5_000_000)throw Error('5MB 이하의 파일을 선택하세요.');const d=JSON.parse(await f.text());let g;if(d&&d.schema===schema2&&d.version===2&&GR.includes(d.grade)&&validYear(d.year))g=d.grade;else if(d&&d.schema===schema&&d.version===1&&validYear(d.year))g=6;else throw Error('학년이음에서 저장한 JSON 백업을 선택하세요.');const r=normalize(d.record,d.year,g),legacy=d.schema===schema,exists=has(stores[g].years,d.year);if(exists||g!==grade||legacy){const m=`${g}학년 ${d.year}학년도 ${exists?`의 기존 업무를 이 파일의 ${r.tasks.length}개 업무로 교체`:`에 이 파일의 ${r.tasks.length}개 업무를 추가`}할까요? 다른 학년·학년도는 바뀌지 않습니다.`+(legacy?'\n(학년 표시가 없는 예전 백업이라 6학년으로 처리합니다.)':'')+(g!==grade?`\n현재 ${grade}학년이 아니라 ${g}학년 자료로 복원되며 화면도 ${g}학년으로 이동합니다.`:'');if(!confirm(m))return;}if(g!==grade)setGrade(g);store.years[d.year]=r;$('transferDialog').close();setYear(d.year);say(`${g}학년 ${d.year}학년도 백업을 복원했습니다.`);}catch(e){feedback(e instanceof SyntaxError?'JSON 파일을 읽을 수 없습니다.':e.message||'복원에 실패했습니다.');}});
+$('restoreBtn').addEventListener('click',async()=>{const f=$('restoreFile').files[0];if(!f)return;try{if(f.size>5_000_000)throw Error('5MB 이하의 파일을 선택하세요.');const d=JSON.parse(await f.text());let g;if(d&&d.schema===schema2&&d.version===2&&GR.includes(d.grade)&&validYear(d.year))g=d.grade;else if(d&&d.schema===schema&&d.version===1&&validYear(d.year))g=6;else throw Error('학년이음에서 저장한 JSON 백업을 선택하세요.');const r=normalize(d.record,d.year,g),legacy=d.schema===schema,exists=has(stores[g].years,d.year);if(exists){const kept=new Set(r.tasks.map(t=>t.id)),current=new Set(stores[g].years[d.year].tasks.map(t=>t.id));const counts=await countYearFiles(fileYear(g,d.year)).catch(()=>null);if(counts&&[...counts.keys()].some(id=>current.has(id)&&!kept.has(id)))throw Error('이 백업으로 복원하면 첨부가 있는 업무가 목록에서 사라집니다. 해당 업무의 파일을 먼저 내려받고 첨부를 삭제한 뒤 다시 복원하세요.');}if(exists||g!==grade||legacy){const m=`${g}학년 ${d.year}학년도 ${exists?`의 기존 업무를 이 파일의 ${r.tasks.length}개 업무로 교체`:`에 이 파일의 ${r.tasks.length}개 업무를 추가`}할까요? 다른 학년·학년도는 바뀌지 않습니다. 이 브라우저의 첨부 파일은 동일한 업무에 그대로 남습니다.`+(legacy?'\n(학년 표시가 없는 예전 백업이라 6학년으로 처리합니다.)':'')+(g!==grade?`\n현재 ${grade}학년이 아니라 ${g}학년 자료로 복원되며 화면도 ${g}학년으로 이동합니다.`:'');if(!confirm(m))return;}if(g!==grade)setGrade(g);store.years[d.year]=r;$('transferDialog').close();setYear(d.year);say(`${g}학년 ${d.year}학년도 백업을 복원했습니다.`);}catch(e){feedback(e instanceof SyntaxError?'JSON 파일을 읽을 수 없습니다.':e.message||'복원에 실패했습니다.');}});
 document.querySelectorAll('button[data-close]').forEach(b=>b.addEventListener('click',()=>$(b.dataset.close).close()));
-$('editDialog').addEventListener('close',()=>{$('fTitle').setCustomValidity('');});
+$('editDialog').addEventListener('close',()=>{if(!$('editDialog').open)filePanel=null;$('fTitle').setCustomValidity('');});
 addYear(year);fillCats();drawTabs();
 $('gradeTabs').addEventListener('click',e=>{const b=e.target.closest('button[data-grade]');if(b){setGrade(Number(b.dataset.grade));$('gtab-'+grade)?.focus({preventScroll:true});}});
 $('gradeTabs').addEventListener('keydown',e=>{const i=GR.indexOf(grade);let n=-1;if(e.key==='ArrowRight')n=(i+1)%GR.length;else if(e.key==='ArrowLeft')n=(i+GR.length-1)%GR.length;else if(e.key==='Home')n=0;else if(e.key==='End')n=GR.length-1;if(n<0)return;e.preventDefault();setGrade(GR[n]);$('gtab-'+grade)?.focus({preventScroll:true});});
